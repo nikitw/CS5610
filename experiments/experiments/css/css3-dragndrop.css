@@ -1,0 +1,45 @@
+body {
+          padding-top: 50px;
+          padding-bottom: 50px;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .starter-template {
+          padding: 40px 15px;
+          text-align: center;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .debug {
+            position: fixed;
+            background: #fff;
+            opacity: 0.5;
+            top: 100px;
+            left: 10px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+     
+        .exp-part {
+            background: #fff;
+            border-radius: 5px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            padding: 20px;
+        }
+        
+        .draggable {
+            background: #fcd7bf;    
+        }
+        
+        .mirror {
+            opacity: 0.5;
+            border: 2px solid #333;
+        }
