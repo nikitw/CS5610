@@ -109,7 +109,10 @@ $(window).scroll($.debounce(0, true, function (e) {
 
         
         $(window).load(function (e) {
-            $('.js_info').text($('.info').text());
+            $('.js_draggables').text($('.draggables_info').text());
+            $('.js_saveshuffle').text($('.saveshuffle_info').text());
+            $('.js_drag').text($('.drag_info').text());
+            $('.js_mousepos').text($('.mousepos_info').text());
 
             $("#nav_home").click(function (e) {
                 smoothScroll(0, 'slow');
