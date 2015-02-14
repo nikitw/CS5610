@@ -1,4 +1,0 @@
-﻿whatisnext.htm?whatisnext.txt   What is Next?
-../000-exp1.html		HTML/HTML5 experiment
-../000-exp2.html		CSS/CSS3 experiment
-../000-exp3.html		Menu bar experiment
