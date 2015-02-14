@@ -70,7 +70,6 @@
                     </li>
                 </ul>
             </nav>
-
         <nav class="nav2">
                 <ul class="menu">
                     <li><a href="#">Home</a></li>
@@ -104,7 +103,6 @@
                     </li>
                 </ul>
             </nav>
-
         <div class="tile left">
             <h1>Tile 1</h1>
         </div>
@@ -117,9 +115,62 @@
         <div class="tile left">
             <h1>Tile 4</h1>
         </div>
+		<div class="block">
+			<h1>About</h1>
+			This experiments explains the liquid design, technically called responsive website that can adjust the layout based on the screen size.
+			The above divs are tiles in a desktop view and they stack when the screen is shortened widthwise. The Navigation is also the same responsive
+			which is implemented on the home page and it stacks in to dropdowns as soon as the screen starts getting small.	
+		</div>
+
+		<div class="block">
+			<h1>Code</h1>
+			<pre><code>
+			&lt;div class="tile left"&gt;
+            			&lt;h1&gt;Tile 1&lt;/h1&gt;
+	        	&lt;/div&gt;
+	        	&lt;div class="tile left"&gt;
+            			&lt;h1&gt;Tile 2&lt;/h1&gt;
+        		&lt;/div&gt;
+
+        		 @media screen and (min-width: 971px) {
+			    .container {
+			        width: auto;
+			        margin: 10px;
+			    }
+			    .tile {
+			        width: 278px;
+			        height: 200px;
+			        margin: 5px 5px;
+			    }
+			    
+			    .nav1 {
+			        display:  block; 
+			    }
+			 }
+			 
+			 @media screen and (max-width: 970px) {
+			     .container {
+			         width: 700px;
+			     }
+
+			     .tile {
+			         width: 318px;
+			         margin: 5px 5px;
+			     }
+			    
+			    .nav1 {
+			        display: block; 
+			    }
+			    
+			    ul.menu li a{
+			        padding: 15px 15px; 
+			    }
+			 }
+			</code></pre>
+		</div>
+
         <div class="block">
             <h1>Source</h1>
-
             <ul>
                 <li>
                     Click <a href="../fileview/Default.aspx?~/experiments/000-exp4.html">here</a> to view HTML source.
