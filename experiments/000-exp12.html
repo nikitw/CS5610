@@ -43,6 +43,8 @@
         
         <div class="exp-part grid_layout">
             <h2>Grid</h2>
+            <p>Data is represented in a tabular format without using HTML tables. Data is populated by using JQuery AJAX from a flat Json file.
+            Uses col-md-4 from Bootstrap css. IIS web.config needs to add a filter for supporting Json files.</p>
             <div class="row">
                 <div class="col-md-4"><h3>Item ID</h3></div>
                 <div class="col-md-4"><h3>Item Name</h3></div>
@@ -56,21 +58,19 @@
         <div class="exp-part">
             <h1>About</h1>
             The experiment demonstrates Bootstrap Grid. Data is loaded from <a href="data/data1.json">data1.json</a> via JQuery AJAX.
-            <p>
-                <pre>
-                    <code class="grid_info">
+            <p>The below code demonstrates use of bootstrap.min.css col-md-4 class that represents tabular data without using html tables.</p>
+            <pre>
+                <code class="grid_info">
 
-                    </code>
-                </pre>
-            </p>
-            <p>
-                <pre>
-                    <code class="ajax_info">
+                </code>
+            </pre>
+            <p>The below JQuery populates data from AJAX call to the json file on the server. Data is a json array which is parsed in a loop and creates the divs on-the-fly</p>
+            <pre>
+                <code class="ajax_info">
 
-                    </code>
-                </pre>
-            </p>
-
+                </code>
+            </pre>
+            
             <h1>Source</h1>
 
             <ul>
