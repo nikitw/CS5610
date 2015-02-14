@@ -44,7 +44,9 @@
         <section class="translucent">
             <h1>Bootstrap</h1>
             <p>
-                Code used to integrate navigation from Bootstrap.
+                Code used to integrate navigation from Bootstrap. 
+                The navigation is similar to the one we implemented in previous experiments, 
+                but css makes a large difference in making navigation fixed at the top of the page and smothly navigate all around the page.
             </p>
             <p>
                 <pre>
@@ -60,6 +62,7 @@
             <h1>Navigation focus</h1>
             <p>
                 Navigation is responding to scroll event. It brings focus to the corresponding navigation tab as soon as the page position is reached while scrolling.
+                It focuses Bootstrap tab when the scroll top value on window is less than 400px, Navigation tab when scroll is between 400 and 1030px and Debounce JQuery when scroll exceeds 1030px.
             </p>
 
             <p>
