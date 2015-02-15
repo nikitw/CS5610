@@ -1,0 +1,173 @@
+﻿.fleft {
+    		float: left;
+    	}
+
+    	.template {
+    		background: #fff;
+    		padding: 20px;
+    		width: 300px;
+    		height: 300px;
+    		border-radius: 5px;
+    		margin-top: 50px;
+    		margin-right: 20px;
+    		margin-bottom: 20px;
+    	}
+
+    	.clear {
+    		clear: both;
+    	}
+
+   
+    	.city {
+    		font-size: 20px;
+    		font-weight: bold;
+    		word-wrap: break-word;
+    		text-align: center;
+    		white-space: nowrap; 
+    		overflow: hidden;
+    		width: 200px;
+    	}
+    		
+		.template div {
+			margin-top: 3px;
+		}
+
+		.temperature .icon {
+			height: 80px;
+			width: 70px;
+		}
+	
+		.location .delete {
+			margin-top: -5px;
+			margin-left: 30px;
+			width: 30px;
+			height: 30px;
+			background: url(../images/delete.png) no-repeat;
+			background-size: contain;
+			cursor: pointer;
+		}
+
+		.temperature .num {
+			width: 90px;
+			height: 80px;
+			font-size: 50px;
+			font-weight: bold;
+			text-align: right;
+			margin-right: 5px;
+		}
+
+		.temperature .degree {
+			margin-right: 20px;
+			margin-left: 10px;
+			font-size: 50px;
+			font-weight: bold;
+		}
+
+		.temperature .units {
+			font-size: 15px;
+			color: rgb(11, 165, 215);
+		}
+
+		.temperature .units:hover {
+			cursor: pointer;
+		}
+
+		.temperature .selected {
+			color: black;
+		}
+
+		.humidity .text, .wind .text {
+			font-size: 15px;
+			font-weight: bold;
+			width: 70px;
+		}
+
+		.humidity .num, .wind .num {
+			font-size: 15px;
+			font-weight: bold;
+			color: rgb(11, 165, 215);
+			margin: 2px 2px 0px 10px;
+		}
+
+		.humidity .units, .wind .units {
+			margin-left: 5px;
+			color: rgb(122, 128, 132);
+		}
+
+		.description .text {
+			margin-top: 40px;
+			font-size: 20px;
+			font-weight: bold;
+			color: rgb(11, 165, 215);
+			text-overflow: ellipsis;
+			width: 260;
+		}
+
+		.refresh {
+			padding: 10px 0px;
+			width: 260px;
+		}
+
+		.temperature .separator {
+			color: lightgray;
+			margin: 3px 3px;
+		}
+
+		.button {
+			font-size: 15px;
+			font-weight: bold;
+			text-align: center;
+			border-radius: 5px;
+			color: #fff;
+			width: 100px;
+			margin: 0px 80px;
+			padding: 10px;
+			-webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+			box-shadow: 0px 0px 20px -2px gray;
+			background: #1e5799; /* Old browsers */
+			background: -moz-linear-gradient(-45deg, #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#1e5799), color-stop(50%,#2989d8), color-stop(51%,#207cca), color-stop(100%,#7db9e8)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(-45deg, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(-45deg, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(-45deg, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* IE10+ */
+			background: linear-gradient(135deg, #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+		}
+
+		.button:hover {
+			cursor: pointer;
+			box-shadow: 0px 0px 20px 0px gray;
+		}
+
+		.add_widget {
+			margin-left: 90px;
+			background: url(../images/add_widget.png) no-repeat left top;
+			background-size: contain;
+			width:80px;
+			height:80px;
+		}
+
+		.add_widget:hover {
+			cursor: pointer;
+		}
+
+		.add_widget_text {
+			padding: 25px;
+			font-size: 30px;
+			text-align: center;
+			color: darkgray;
+		}
+
+		.add_new_city {
+			display: none;
+			margin-left: 50px;
+		}
+	
+		.add_new_city button {
+			margin: 15px;
+		}

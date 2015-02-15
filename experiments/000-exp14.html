@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WeathR App</title>
+    
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/css3-parallax.css" />
+    <link rel="stylesheet" href="css/css3-bs-grid.css" />
+    <link rel="stylesheet" href="css/css3-weather-widget.css"/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+  <body>
+    <div class="bg"> </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">WeathR
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a id="nav_home" href="#app">App</a></li>
+            <li><a id="nav_code" href="#about">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+        <div class="WeathRApp">
+            <div class="widget template fleft" data-units="metric">
+            	<div class="info">
+            		<div class="location clear">
+            			<div class="city fleft">Boston, US</div>
+            			<div class="delete fleft"></div>
+            		</div>
+            		<div class="temperature clear">
+            			<div class="icon fleft">
+            				
+            			</div>
+            			<div class="num fleft">
+            				10
+            			</div>
+						<div class="degree fleft">
+							˚
+						</div>
+						<div class="units fleft selected" data-units="metric">
+							C
+						</div>
+						<div class="separator fleft">
+							|
+						</div>
+						<div class="units fleft" data-units="imperial">
+							F
+						</div>
+            		</div>
+            		<div class="humidity clear">
+            			<div class="text fleft">Humidity:</div>
+            			<div class="num fleft">100</div>
+            			<div class="units fleft">%</div>
+            		</div>
+            		<div class="wind clear">
+            			<div class="text fleft">wind:</div>
+            			<div class="num fleft">10</div>
+            			<div class="units fleft">kmph</div>
+            		</div>
+
+            		<div class="description clear">
+            			<div class="text">
+            				Snow all day.
+            			</div>
+            		</div>
+				</div>
+				<div class="refresh">
+					<div class="button">
+						Refresh
+					</div>
+				</div>
+            </div>
+
+            <div class="add_widget_div template fleft">
+            	<div class="add_widget_text">
+            		Add a new city
+            	</div>
+            	<div class="add_widget"></div>
+            	<div class="add_new_city">
+            		<input class="city_name fleft" />
+            		<button class="add_city fleft clear">Add</button>
+            		<button class="cancel fleft">Cancel</button> 
+            	</div>
+            </div>
+        </div>
+
+        <div class="about exp-part clear">
+            <h1>About</h1>
+            <p>
+            This application uses JQuery, AJAX and WebAPI features to create weather widgets for every city.
+            Refresh button fetches the most recent data from API. Data units are changeable using C and F options
+            on every widget. Every widget is a standalone applet that has its own event handlers.
+            </p>
+            <p>The below is an HTML template used for creating the widgets,	
+            every widget loads the weather data for a particular city. To add a city, 
+            just click on the add city widget and enter the city name.</p>
+
+                	<textarea cols="80" rows="20">
+	<div class="widget template fleft" data-units="metric">
+		<div class="info">
+			<div class="location clear">
+			<div class="city fleft">Boston, US</div>
+		</div>
+		<div class="temperature clear">
+			<div class="icon fleft">
+				snow
+			</div>
+			<div class="num fleft">
+				10
+			</div>
+			<div class="degree fleft">
+				˚
+			</div>
+			<div class="units fleft selected" data-units="metric">
+				C
+			</div>
+			<div class="separator fleft">
+				|
+			</div>
+			<div class="units fleft" data-units="imperial">
+				F
+			</div>
+		</div>
+		<div class="humidity clear">
+			<div class="text fleft">Humidity:</div>
+			<div class="num fleft">100</div>
+			<div class="units fleft">%</div>
+		</div>
+		<div class="wind clear">
+			<div class="text fleft">wind:</div>
+			<div class="num fleft">10</div>
+			<div class="units fleft">kmph</div>
+		</div>
+
+		<div class="description clear">
+			<div class="text">
+				Snow all day.
+			</div>
+		</div>
+		</div>
+		<div class="refresh">
+			<div class="button">
+				refresh
+			</div>
+		</div>
+	</div>
+                	</textarea>
+                	<p>
+                	The code below is JQuery used by the above widgets where activateWidgetActions adds the event handlers for a widget when it is created,
+                	Function activateAdderWidget adds events for handling the action to add a new city widget.
+                	</p>
+                	<textarea rows=20 cols=80>
+                		function activateWidgetActions(widget) {
+	    	widget.find(".refresh .button").click( function (e) {
+	    		var parent = $(this).closest(".template");
+	    	
+	    		parent.update = function (data) {
+	    			updater(this, data);
+	    		};
+
+				refreshWeather(parent, parent.find(".temperature .selected").data("units"));
+	    	});
+
+	    	widget.find(".temperature .units").click(function (e) {
+	    		var parent = $(this).closest(".template");
+	    		var units = $(this).data("units");
+	    		parent.find(".temperature .units").removeClass("selected");
+
+				$(this).addClass("selected");
+
+				parent.update = function (data) {
+	    			updater(this, data);
+	    		};
+	    		if(units == "imperial")
+	    			parent.find(".wind .units").html("mph");
+	    		else
+					parent.find(".wind .units").html("kmph");
+
+				refreshWeather(parent, units);
+	    	});
+		}
+
+		function activateAdderWidget(widget) {
+			widget.find(".city_name").val("");
+			widget.find(".add_widget").show();
+			widget.find(".add_new_city").hide();
+			widget.find(".add_widget").click( function (e) {
+	    		$(this).hide();
+	    		$(this).closest(".template").find(".add_new_city").show();
+	    	});
+			
+			widget.find(".cancel").click(function (e) {
+				$(this).parent().hide();
+	    		$(this).closest(".template").find(".add_widget").show();
+			});
+
+	    	widget.find(".add_city").click(function (e) {
+	    		var city = $(".city_name").val();
+	    		var newWid = TEMPLATE.clone();
+	    		var adder = ADD.clone();
+	    		newWid.closest(".template").attr("data-city", city);
+
+	    		newWid.appendTo(".WeathRApp");
+	    		$(".add_widget_div").remove();
+	    		adder.appendTo(".WeathRApp");
+
+	    		newWid.update = function (data) {
+	    			updater(this, data);
+	    		};
+	    		activateWidgetActions(newWid);
+	    		activateAdderWidget(adder);
+	    		refreshWeather(newWid, "metric");
+	    	});
+		}
+                	</textarea>
+                
+            
+			<p>
+				Json updater and Ajax loader are responsible of fetching data from OpenWeatherMap api and putting the values in its respictive widget.
+			</p>
+			<textarea cols=80 rows=20>
+	function refreshWeather (dom, units) {
+		var city = dom.data("city");
+
+		if(! city) {
+			city = CITY;
+			dom.attr("data-city", city);
+		}
+	
+		$.get("http://api.openweathermap.org/data/2.5/weather?q="+city+"&APPID=60cecb8af5d1dbfa53a99e9ad494520a&units="+units, function (json) {
+			return dom.update(json); 
+		});
+	}
+
+	function updater(dom, data) {
+		dom.find(".city").html(data.name +", "+data.sys.country);
+		dom.find(".temperature .num").html(parseInt(data.main.temp));
+		dom.find(".humidity .num").html(data.main.humidity);
+		dom.find(".wind .num").html(data.wind.speed);
+		var desc = data.weather[0].main+", "+data.weather[0].description;
+		dom.find(".description .text").html(desc);
+
+		if(desc.match(/cloud/ig))
+			dom.find(".temperature .icon").css("background", "url(images/cloud.png) no-repeat");
+		else if(desc.match(/rain/ig))
+			dom.find(".temperature .icon").css("background", "url(images/rain.png) no-repeat");
+		else if(desc.match(/snow/ig))
+			dom.find(".temperature .icon").css("background", "url(images/snow.png) no-repeat");
+		else
+			dom.find(".temperature .icon").css("background", "url(images/clear.png) no-repeat");
+
+		dom.find(".temperature .icon").css("background-size", "contain");
+	}
+			</textarea>
+            <h1>Source</h1>
+            <ul>
+                <li>
+                    Click <a href="../fileview/Default.aspx?~/experiments/000-exp13.html">here</a> to view HTML source.
+                </li>
+                <li>
+                    Click <a href="../fileview/Default.aspx?~/experiments/css/css3-dragndrop.css">here</a> to view CSS source.
+                </li>
+                <li>
+                    Click <a href="../fileview/Default.aspx?~/experiments/js/js-dragndrop.js">here</a> to view JS source.
+                </li>
+
+            </ul>   
+
+            <h1>Reference</h1>
+            <a href="http://w3schools.com" target="_blank">www.w3schools.com</a>
+        </div>
+
+    </div>
+
+    <div class="draggables_info hidden">
+        
+	</div>
+         
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/debounce.min.js"></script>
+    <script src="js/js-WeathRApp.js"></script>
+  </body>
+</html>
