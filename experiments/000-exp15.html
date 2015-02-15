@@ -1,0 +1,78 @@
+﻿<!DOCTYPE>
+<html>
+	<head>
+		<title>AngularJS</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+	</head>
+	<body>
+		<h1>AngularJS basics</h1>
+		<div ng-app="" ng-init="name='nikit'; person={firstName:'nikit', lastName:'waghela'}" ng-controller="customController">
+			<b>Using ng-model and ng-bind, Type the text in the input field below and the same text will be written in the span below it.</b>
+		 	<p>Name: <input type="text" ng-model="name"></p>
+		 	<p ng-bind="name"></p>
+		 	<b>Using ng-init variables</b>
+			<p>The name is <span ng-bind="name"></span></p>
+			<b>Using ng-controller function and scope variable</b>
+			<p>
+				First name:<input ng-model="firstName" />
+				Last name:<input ng-model="lastName" />
+			</p>
+			<b>Using Math operations within double curly brackets.</b>
+			<p>
+				10 + 10: {{10 + 10}}
+			</p>
+
+			<b>Json object in ng-init.</b>
+			<p ng-bind="person.firstName">
+			</p>
+			<p ng-bind="person.lastName">
+			</p>
+
+			<b>About</b>
+			<p>This experiment summarises few basic AngularJS features and demonstrate them in the code below.
+			It is very useful in generating dynamic webpages.</p>
+			<textarea cols=80 rows=20>
+				
+			 	<p>Name: <input type="text" ng-model="name"></p>
+			 	<p ng-bind="name"></p>
+
+				<p>The name is <span ng-bind="name"></span></p>
+
+				<p>
+					First name:<input ng-model="firstName" />
+					Last name:<input ng-model="lastName" />
+				</p>
+
+				<p>
+					10 + 10: {{10 + 10}}
+				</p>
+
+
+				<p ng-bind="person.firstName">
+				</p>
+				<p ng-bind="person.lastName">
+				</p>
+
+
+			function customController($scope) {
+				$scope.firstName = "nikit";
+				$scope.lastName = "waghela";
+			}
+			</textarea>
+		</div>
+		<h1>Source</h1>
+        <ul>
+            <li>
+                Click <a href="../fileview/Default.aspx?~/experiments/000-exp15.html">here</a> to view HTML source.
+            </li>
+
+        </ul> 
+	<script>
+		
+		function customController($scope) {
+			$scope.firstName = "nikit";
+			$scope.lastName = "waghela";
+		}
+	</script>
+	</body>
+</html>
