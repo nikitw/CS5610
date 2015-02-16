@@ -1,3 +1,6 @@
 whatisnext.htm?whatisnext.txt   What is Next?
+../000-exp17.html		JQuery UI and localStorage
+../000-exp16.html		Simple AJAX WebAPI
 ../000-exp14.html		Weather App AJAX WebAPI
 ../000-exp15.html		AngularJS basics
+../WeatherFeed.html		Weather App using AngularJS

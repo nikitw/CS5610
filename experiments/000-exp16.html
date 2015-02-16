@@ -1,0 +1,126 @@
+﻿<!DOCTYPE>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WebAPI JQuert AJAX</title>
+    
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/css3-parallax.css" />
+    <link rel="stylesheet" href="css/css3-bs-grid.css" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    	td, th {
+    		padding: 2px;
+    		border: 1px solid black;
+    	}
+    </style>
+  </head>
+  <body>
+    <div class="bg"> </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">WebAPI
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+		<div class="container">
+			<div class="exp-part">
+				<h1>
+					WebAPI JQuery
+				</h1>
+				<p> The table shows weather details of all the added cities. The input form below allows user to add a new city to the list.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>
+								City
+							</th>
+							<th>
+								Temperature
+							</th>
+							<th>
+								Wind
+							</th>
+						</tr>
+					</thead>
+					<tbody class="cities">
+						<tr class="template">
+							<td class="city"></td>
+							<td class="temp"></td>
+							<td class="wind"></td>
+						</tr>
+					</tbody>
+						<tr>
+							<td colspan="3">
+								New City: <input type="text" id="cityname" placeholder="City name"/><button class="add">Add</button>
+							</td>
+						</tr>
+				</table>
+			</div>
+			<div class="about exp-part">
+				<h1>About</h1>
+				The simple application of webAPI using JQuery. The input box takes the city as input and gets the weather details form OpenWeatherMap API.
+				Template is a &lt;tr&gt; with three td's one for city name second for temperature and last one for wind speed.
+				As you press Add button after inserting city name, an AJAX call to API fetches the details and puts it in a template.
+				<p>Template</p>
+				<pre>
+					<code>
+	&lt;tr class="template"&gt;
+		&lt;td class="city">&lt;/td&gt;
+		&lt;td class="temp">&lt;/td&gt;
+		&lt;td class="wind">&lt;/td&gt;
+	&lt;/tr&gt;
+					</code>
+				</pre>
+				<p>AJAX</p>
+				<pre>
+					<code>
+function getWeather (city, units) {
+	$.get("http://api.openweathermap.org/data/2.5/weather?q="+city+"&APPID=60cecb8af5d1dbfa53a99e9ad494520a&units="+units, function (json) {
+		var newCity = TEMPLATE.clone();
+		newCity.find(".city").html(json.name + ", "+ json.sys.country);
+		newCity.find(".temp").html(Math.round(json.main.temp)+"˚C");
+		newCity.find(".wind").html(json.wind.speed+" kmph");
+		newCity.appendTo(".cities");
+	});
+}
+					</code>
+				</pre>
+				<h1>Source</h1>
+	            <ul>
+	                <li>
+	                    Click <a href="../fileview/Default.aspx?~/experiments/000-exp16.html">here</a> to view HTML source.
+	                </li>
+
+	                <li>
+	                    Click <a href="../fileview/Default.aspx?~/experiments/js/js-ajax-exp16.js">here</a> to view JS source.
+	                </li>
+
+	            </ul>   
+
+	            <h1>Reference</h1>
+	            <a href="http://w3schools.com" target="_blank">www.w3schools.com</a>
+			</div>
+		</div>
+	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="js/js-ajax-exp16.js"></script>
+</html>

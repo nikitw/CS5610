@@ -2,4 +2,4 @@ whatisnext.htm?whatisnext.txt   What is Next?
 ../experiments/week1/	HTML5 and CSS
 ../experiments/week2/	CSS3 Responsiveness and Parallax
 ../experiments/week3/	Bootstrap and JQuery
-../experiments/week4/	AJAX WebAPI
+../experiments/week4/	AJAX WebAPI AngularJS
