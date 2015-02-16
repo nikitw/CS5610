@@ -1,0 +1,19 @@
+﻿._snow {
+	background: url(../images/snow.png) no-repeat;
+}
+
+._rain {
+	background: url(../images/rain.png) no-repeat;
+}
+
+._clear {
+	background: url(../images/clear.png) no-repeat;
+}
+
+._cloud {
+	background: url(../images/cloud.png) no-repeat;
+}
+
+._snow, ._rain, ._cloud, ._clear {
+	background-size: contain;
+}

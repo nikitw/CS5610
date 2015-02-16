@@ -117,62 +117,63 @@
             <p>The below is an HTML template used for creating the widgets,	
             every widget loads the weather data for a particular city. To add a city, 
             just click on the add city widget and enter the city name.</p>
-
-                	<textarea cols="80" rows="20">
-	<div class="widget template fleft" data-units="metric">
-		<div class="info">
-			<div class="location clear">
-			<div class="city fleft">Boston, US</div>
-		</div>
-		<div class="temperature clear">
-			<div class="icon fleft">
+            		<pre>
+                	<code>
+	&lt;div class="widget template fleft" data-units="metric">
+		&lt;div class="info">
+			&lt;div class="location clear">
+			&lt;div class="city fleft">Boston, US&lt;/div>
+		&lt;/div>
+		&lt;div class="temperature clear">
+			&lt;div class="icon fleft">
 				snow
-			</div>
-			<div class="num fleft">
+			&lt;/div>
+			&lt;div class="num fleft">
 				10
-			</div>
-			<div class="degree fleft">
+			&lt;/div>
+			&lt;div class="degree fleft">
 				˚
-			</div>
-			<div class="units fleft selected" data-units="metric">
+			&lt;/div>
+			&lt;div class="units fleft selected" data-units="metric">
 				C
-			</div>
-			<div class="separator fleft">
+			&lt;/div>
+			&lt;div class="separator fleft">
 				|
-			</div>
-			<div class="units fleft" data-units="imperial">
+			&lt;/div>
+			&lt;div class="units fleft" data-units="imperial">
 				F
-			</div>
-		</div>
-		<div class="humidity clear">
-			<div class="text fleft">Humidity:</div>
-			<div class="num fleft">100</div>
-			<div class="units fleft">%</div>
-		</div>
-		<div class="wind clear">
-			<div class="text fleft">wind:</div>
-			<div class="num fleft">10</div>
-			<div class="units fleft">kmph</div>
-		</div>
+			&lt;/div>
+		&lt;/div>
+		&lt;div class="humidity clear">
+			&lt;div class="text fleft">Humidity:&lt;/div>
+			&lt;div class="num fleft">100&lt;/div>
+			&lt;div class="units fleft">%&lt;/div>
+		&lt;/div>
+		&lt;div class="wind clear">
+			&lt;div class="text fleft">wind:&lt;/div>
+			&lt;div class="num fleft">10&lt;/div>
+			&lt;div class="units fleft">kmph&lt;/div>
+		&lt;/div>
 
-		<div class="description clear">
-			<div class="text">
+		&lt;div class="description clear">
+			&lt;div class="text">
 				Snow all day.
-			</div>
-		</div>
-		</div>
-		<div class="refresh">
-			<div class="button">
+			&lt;/div>
+		&lt;/div>
+		&lt;/div>
+		&lt;div class="refresh">
+			&lt;div class="button">
 				refresh
-			</div>
-		</div>
-	</div>
-                	</textarea>
+			&lt;/div>
+		&lt;/div>
+	&lt;/div>
+                	</code></pre>
                 	<p>
                 	The code below is JQuery used by the above widgets where activateWidgetActions adds the event handlers for a widget when it is created,
                 	Function activateAdderWidget adds events for handling the action to add a new city widget.
                 	</p>
-                	<textarea rows=20 cols=80>
+                	<pre>
+                	<code>
                 		function activateWidgetActions(widget) {
 	    	widget.find(".refresh .button").click( function (e) {
 	    		var parent = $(this).closest(".template");
@@ -235,13 +236,14 @@
 	    		refreshWeather(newWid, "metric");
 	    	});
 		}
-                	</textarea>
+                	</code></pre>
                 
             
 			<p>
 				Json updater and Ajax loader are responsible of fetching data from OpenWeatherMap api and putting the values in its respictive widget.
 			</p>
-			<textarea cols=80 rows=20>
+			<pre>
+			<code>
 	function refreshWeather (dom, units) {
 		var city = dom.data("city");
 
@@ -274,7 +276,7 @@
 
 		dom.find(".temperature .icon").css("background-size", "contain");
 	}
-			</textarea>
+			</code></pre>
             <h1>Source</h1>
             <ul>
                 <li>

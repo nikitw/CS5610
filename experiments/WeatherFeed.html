@@ -1,0 +1,205 @@
+﻿<!DOCTYPE>
+<html>
+	<head>
+		<title>WeathRFeed</title>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet" />
+	    <link rel="stylesheet" href="css/css3-parallax.css" />
+	    <link rel="stylesheet" href="css/css3-bs-grid.css" />
+	    <link rel="stylesheet" href="css/css3-weather-widget.css"/>
+	    <link rel="stylesheet" href="css/WeatherFeed.css"/>
+	    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	    <!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+	  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	</head>
+	<body ng-app="WeathRFeedApp" ng-controller="cityController">
+
+	<div class="bg"> </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">WeathR
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a id="nav_home" href="#app">App</a></li>
+            <li><a id="nav_code" href="#about">About</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+        <div class="WeathRApp">
+            <div class="widget template fleft" ng-repeat="city in cityList" data-units="metric">
+            	<div class="info">
+            		<div class="location clear">
+            			<div class="city fleft">{{city.name}}</div>
+            			<div class="delete fleft" ng-click="removeCity(city)"></div>
+            		</div>
+            		<div class="temperature clear">
+            			<div class="icon _{{city.response.icon}} fleft">
+            				
+            			</div>
+            			<div class="num fleft">
+            				{{city.response.main.temp}}
+            			</div>
+						<div class="degree fleft">
+							˚
+						</div>
+						<div class="units fleft selected" data-units="metric" ng-click="changeCityUnits(city, metric)"
+									onclick="changeUnits(this)">
+							C
+						</div>
+						<div class="separator fleft">
+							|
+						</div>
+						<div class="units fleft" data-units="imperial" ng-click="changeCityUnits(city, imperial)"
+									onclick="changeUnits(this)">
+							F
+						</div>
+            		</div>
+            		<div class="humidity clear">
+            			<div class="text fleft">Humidity:</div>
+            			<div class="num fleft">{{city.response.main.humidity}}</div>
+            			<div class="units fleft">%</div>
+            		</div>
+            		<div class="wind clear">
+            			<div class="text fleft">wind:</div>
+            			<div class="num fleft">{{city.response.wind.speed}}</div>
+            			<div class="units fleft">kmph</div>
+            		</div>
+
+            		<div class="description clear">
+            			<div class="text">
+            				{{city.response.weather[0].main + ", "+ city.response.weather[0].description}}
+            			</div>
+            		</div>
+				</div>
+				<div class="refresh">
+					<div class="button" ng-click="refreshCity(city)">
+						Refresh
+					</div>
+				</div>
+            </div>
+
+            <div class="add_widget_div template fleft">
+            	<div class="add_widget_text">
+            		Add a new city
+            	</div>
+            	<div class="add_widget"></div>
+            	<div class="add_new_city">
+            		<input class="city_name fleft" ng-model="cityName"/>
+            		<button class="add_city fleft clear" ng-click="addCity()">Add</button>
+            		<button class="cancel fleft">Cancel</button> 
+            	</div>
+            </div>
+        </div>
+
+        <div class="about exp-part clear">
+        	<h1>About</h1>
+        	<p>
+        		This is the same weather widget app but using AngularJS and WebAPI. 
+        		Using Angular eases the preocess of creating
+        		widgets from its templates compared to with JQuery alone.
+        		This helps in differentiating view and controller parts in webapp.
+        		The HTML widget template is same as what used before.
+        	</p>
+			
+			<p>
+				controller.js below handles all the view updates. It defines the methods
+				to add remove and refresh weather of a particular widget. It also allows
+				changing units for weather API.
+			</p>
+			<pre>
+				<code>
+	angular.module('WeathRFeedApp.controllers', []).
+		controller('cityController', 
+			function($scope, owmAPIservice) { ... });
+				</code>
+			</pre>
+			<p>
+				app.js defines the application modules like controllers and services added to the app.
+			</p>
+			<pre>
+				<code>
+	angular.module('WeathRFeedApp', [
+	  'WeathRFeedApp.controllers',
+	  'WeathRFeedApp.services'
+	]);
+				</code>
+			</pre>
+			<p>
+				services.js defines the webAPI service that helps in fetching data from OpenWeatherMap server.
+			</p>
+			<pre>
+				<code>
+	angular.module('WeathRFeedApp.services', []).
+	  factory('owmAPIservice', function($http) {
+
+	    var owmAPI = {};
+
+	    owmAPI.getWeather = function(city, units) {
+	      return $http({
+	        method: 'get', 
+	        url: 'http://api.openweathermap.org/data/2.5/weather?q='+
+	        		city+'&units='+units
+	      });
+	    }
+
+	    return owmAPI;
+	  });
+				</code>
+			</pre>
+
+			<h1>Source</h1>
+            <ul>
+                <li>
+                    Click <a href="../fileview/Default.aspx?~/experiments/WeatherFeed.html">here</a> to view HTML source.
+                </li>
+                <li>
+                    Click <a href="../fileview/Default.aspx?~/experiments/css/WeatherFeed.css">here</a> to view CSS source.
+                </li>
+                <li>
+                    Click <a href="../fileview/Default.aspx?~/experiments/js/WeatherFeed.js">here</a> to view JS source.
+                </li>
+                <li>
+                    Click <a href="../fileview/Default.aspx?~/experiments/js/controller.js">here</a> to view controller JS source.
+                </li>
+                <li>
+                    Click <a href="../fileview/Default.aspx?~/experiments/js/app.js">here</a> to view app JS source.
+                </li>
+                <li>
+                    Click <a href="../fileview/Default.aspx?~/experiments/js/services.js">here</a> to view services JS source.
+                </li>
+
+            </ul>   
+
+            <h1>Reference</h1>
+            <a href="http://w3schools.com" target="_blank">www.w3schools.com</a></br>
+            <a href="http://www.toptal.com/angular-js/a-step-by-step-guide-to-your-first-angularjs-app" target="_blank">www.toptal.com</a>
+        </div>
+	  </div>
+
+	  <script src="js/bootstrap.min.js"></script>
+      <script src="js/debounce.min.js"></script>
+	  <script src="js/app.js"></script>
+  	  <script src="js/services.js"></script>
+  	  <script src="js/controller.js"></script>
+	  <script src="js/WeatherFeed.js"></script>
+	</body>
+</html>
