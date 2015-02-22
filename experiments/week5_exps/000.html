@@ -1,0 +1,89 @@
+﻿<!DOCTYPE>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title>Angular-Route</title>
+		<link href="../css/bootstrap.min.css" rel="stylesheet" />
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+		<script src="https://code.angularjs.org/1.2.26/angular-route.js"></script>
+	</head>
+	<body ng-app="PrimeBoxApp">
+		<div class="container">
+			<nav>
+				<a href="#/home">Home</a>|
+				<a href="#/about">About</a>|
+				<a href="#/contact">Contact</a>
+			</nav>
+			<b> This is an Angular-routing experiment that handles the navigations on the page through angular-route.js.
+			</b>
+			<div ng-view>
+				
+			</div>
+
+			<div>
+				<p>
+					This is Routing controller that controls the url tail which defines which page to navigate when.
+					It navigate to home page when #/home is encountered and to #/about, #/contact respectively.
+				</p>
+				<p>
+					The below is the code for home controller
+				</p>
+				<pre>
+					<code>
+		var app = angular.module('PrimeBoxApp', [
+		  'ngRoute',
+		  'PrimeBoxApp.controllers',
+		  'PrimeBoxApp.services'
+		]);
+
+		app.config(['$routeProvider',
+		  function($routeProvider) {
+		    $routeProvider.
+		      when('/home', {
+		        templateUrl: 'data/000-home.html'
+		      }).
+		      when('/about', {
+		        templateUrl: 'data/000-about.html'
+		      }).
+			  when('/contact', {
+		        templateUrl: 'data/000-contact.html'
+		      }).
+		      otherwise({
+		        redirectTo: '/home'
+		      });
+		  }]);
+					</code>
+				</pre>
+			</div>
+
+			<div>
+				<h1>Source</h1>
+	            <ul>
+	                <li>
+	                    Click <a href="../../fileview/Default.aspx?~/experiments/week5_exps/000.html">here</a> to view HTML source.
+	                </li>
+	                <li>
+	                    Click <a href="../../fileview/Default.aspx?~/experiments/week5_exps/js/000.js">here</a> to view JS source.
+	                </li>
+	                <li>
+	                    Click <a href="../../fileview/Default.aspx?~/experiments/week5_exps/js/000-controller.js">here</a> to view controller JS source.
+	                </li>
+	                <li>
+	                    Click <a href="../../fileview/Default.aspx?~/experiments/week5_exps/js/000-services.js">here</a> to view services JS source.
+	                </li>
+
+	            </ul>   
+
+	            <h1>Reference</h1>
+	            <a href="http://w3schools.com" target="_blank">www.w3schools.com</a></br>
+	            <a href="http://www.toptal.com/angular-js/a-step-by-step-guide-to-your-first-angularjs-app" target="_blank">www.toptal.com</a>
+			</div>
+		</div>
+	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="js/000.js"></script>
+	<script src="js/000-services.js"></script>
+	<script src="js/000-controller.js"></script>
+</html>

@@ -1,0 +1,34 @@
+﻿<h1>Profile</h1>
+<div ng-controller="profileCtrl">
+	<p>
+		You are Following...
+	</p>
+
+	<div class="row" ng-show="follow.artists">
+		<div class="artist-block col-sm-2" ng-repeat="artist in follow.artists">
+			{{artist.name}}
+			<p ng-click="unfollowArtist(artist)">x</p>
+			<a href="#/details/{{artist.name}}">view</a>
+		</div>
+	</div>
+
+	<div class="row" ng-hide="follow.artists">
+		<div class="artist-block col-sm-3">
+			none.
+		</div>
+	</div>
+	<p>
+		The below code is a controller that grabs the following list from the service lfmAPI.
+		The function UnfollowArtist removes the artist from the follow list.
+	</p>
+	<pre>
+		<code>
+	app.controller('profileCtrl', function($scope, lfmAPIservice) {
+  		$scope.follow = lfmAPIservice.getFollowing();
+  		$scope.unfollowArtist = function (artist) {
+  			lfmAPIservice.unfollowArtist(artist);
+  		};
+  	})
+		</code>
+	</pre>
+</div>

@@ -1,0 +1,18 @@
+﻿<h1>About</h1>
+<div ng-controller="aboutCtrl">
+	<p>page: <b>{{page}}</b></p>
+	<p>
+		This is {{page}} page. This page is routed by ngRoute functionality when
+	navigation to  #/{{page}} url occures.
+	</p>
+	<p>
+		The below is the code for about page located at data/{{page}}.html
+	</p>
+	<pre>
+		<code>
+	app.controller('{{page}}Ctrl', function($scope, lfmAPIservice) {
+	  	$scope.page = "{{page}}";
+	  });
+		</code>
+	</pre>
+</div>

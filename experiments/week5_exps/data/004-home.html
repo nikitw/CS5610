@@ -1,0 +1,31 @@
+﻿<h1>Home</h1>
+<div ng-controller="homeCtrl">
+	<p>
+		Artists
+	</p>
+
+	<div class="row" ng-show="search.artists">
+		<div class="artist-block col-sm-2" ng-repeat="artist in search.artists">
+			{{artist.name}}
+			<p ng-click="followArtist(artist)">+</p>
+		</div>
+	</div>
+	<p>
+		The code below is a controller for home page. It has initialized a data mock for artists
+		It allows to add the artists to followings list at service.
+	</p>
+	<pre>
+		<code>
+	app.controller('homeCtrl', function($scope, lfmAPIservice) {
+		$scope.search = {artists: [
+					{name: "Coldplay", dob: "3-2-1977", albums: ["Ghost Stories", "X and Y", "Parachutes"]},
+					{name: "Hans Zimmer", dob: "3-2-1977", albums: ["Inception", "Rush", "Gladiator"]}
+				], albums:[], genres:[]};
+
+		$scope.followArtist = function(artist) {
+			lfmAPIservice.followArtist(artist);
+		};
+	});
+		</code>
+	</pre>
+</div>

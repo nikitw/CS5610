@@ -1,0 +1,23 @@
+﻿<h1>Details</h1>
+<div ng-controller="detailsCtrl">
+	<h3>{{details.name}}</h3>
+	<p>Born: {{details.dob}}</p>
+	
+	<div class="row" ng-show="details.albums">
+		<div class="artist-block col-sm-3" ng-repeat="album in details.albums">
+			{{album}}
+		</div>
+	</div>
+	<p>
+		The below code is a controller that grabs the artist from the service lfmAPI.
+		This view displays the name and dob details in top section and name of albums in the blocks below.
+		Details is accessed through profiles view href="#/details/[artistName]".
+	</p>
+	<pre>
+		<code>
+	app.controller('detailsCtrl', function($scope, $routeParams, lfmAPIservice) {
+  		$scope.details = lfmAPIservice.getArtistByName($routeParams.artist);
+  	});
+		</code>
+	</pre>
+</div>
