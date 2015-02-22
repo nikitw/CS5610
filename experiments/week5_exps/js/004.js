@@ -19,6 +19,18 @@ app.config(['$routeProvider',
         templateUrl: 'data/004-details.html',
         controller: 'detailsCtrl'
       }).
+      when('/login', {
+        templateUrl: 'data/004-login.html',
+        controller: 'loginCtrl'
+      }).
+      when('/user/:username', {
+        templateUrl: 'data/004-user.html',
+        controller: 'userCtrl'
+      }).
+      when('/artist/add', {
+        templateUrl: 'data/004-artistadd.html',
+        controller: 'homeCtrl'
+      }).
       otherwise({
         redirectTo: '/home'
       });

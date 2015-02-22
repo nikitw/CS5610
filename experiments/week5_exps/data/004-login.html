@@ -1,0 +1,14 @@
+﻿<h1>Login<h1>
+<div class="login-form" ng-controller="loginCtrl">
+	
+	<pre ng-show="loginerror"> <code ng-bind="loginerror"></code></pre>
+	<form class="form-signin" >
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input ng-model="username" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input ng-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+        <button ng-click="login()" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+</div>

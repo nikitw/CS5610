@@ -1,0 +1,14 @@
+﻿<h1>Add Artist<h1>
+<div class="add-form" ng-controller="homeCtrl">
+	<form class="form-add" >
+        
+        <label for="artistname" class="sr-only">Artist Name</label>
+        <input ng-model="artistname" type="text" id="artistname" class="form-control" placeholder="Artist Name" required autofocus>
+        <label for="artistdob" class="sr-only">Date of birth</label>
+        <input ng-model="artistdob" type="text" id="artistdob" class="form-control" placeholder="Date of Birth" required autofocus>
+        <label for="artistalbums" class="sr-only">Album names</label>
+        <input ng-model="artistalbums" type="text" id="artistalbums" class="form-control" placeholder="Album names" required autofocus>
+
+        <button ng-click="addArtist(artistname, artistdob, artistalbums)" class="btn btn-lg btn-primary btn-block" type="submit">Add</button>
+      </form>
+</div>

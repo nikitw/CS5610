@@ -1,5 +1,27 @@
 ﻿<h1>Home</h1>
 <div ng-controller="homeCtrl">
+	<b>
+		This is a music following app with mocked data but a complete navigation functionality using angular-route.js.
+	</b>
+	<div ng-hide="currUser">Application features multiple user login and demonstrates multiple user roles like a typical user and an Admin.
+		<ul>
+			<li>Admin: username=<b>admin@neu.edu</b> password=<b>admin</b></li>
+			<li>Alice: username=<b>alice@neu.edu</b> password=<b>alice</b></li>
+			<li>Bob: username=<b>bob@neu.edu</b> password=<b>bob</b></li>
+		</ul>
+	</div>
+
+	<div ng-show="currUser"> Features
+		<ul ng-show="currUser.admin">
+			<li>An admin can create new Artists</li>
+			<li>An admin can remove Artists</li>
+		</ul>
+		<ul ng-hide="currUser.admin">
+			<li>A user can follow and view Artists</li>
+			<li>A user can unfollow an Artist</li>
+		</ul>
+	</div>
+	
 	<p>
 		Artists
 	</p>
@@ -7,7 +29,12 @@
 	<div class="row" ng-show="search.artists">
 		<div class="artist-block col-sm-2" ng-repeat="artist in search.artists">
 			{{artist.name}}
-			<p ng-click="followArtist(artist)">+</p>
+			<p ng-show="currUser.follow" ng-click="followArtist(artist)">+</p>
+			<p ng-show="currUser.admin" ng-click="removeArtist(artist)">remove</p>
+		</div> 
+		<div class="artist-block col-sm-2" ng-show="currUser.admin">
+			Add Artist
+			<a ng-show="currUser.admin" href="#/artist/add">new</a>
 		</div>
 	</div>
 	<p>
