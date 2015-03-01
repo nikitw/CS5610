@@ -23,7 +23,7 @@ var artists = [
     {name: "Coldplay", genre:"Rock", dob:"1978-02-17", albums:['Parachutes', 'X & Y', 'Ghost Stories']},
     {name: "James Blunt", genre:"Pop", dob:"1977-03-20", albums:['Back To Beldam', 'Moon Landing']},
     {name: "Imagine Dragons", genre:"Pop-Rock", dob:"1983-09-10", albums:['Continued Silence EP', 'Demons', 'Night Visions']},
-    {name: "Above & beyond", genre:"Progressive Trance", dob:"1976-22-10", albums:['Group Therapy', 'TriState', 'Acoustic']},
+    {name: "Above & beyond", genre:"Progressive Trance", dob:"1976-02-10", albums:['Group Therapy', 'TriState', 'Acoustic']},
     {name: "Swidish House Mafia", genre:"House", dob:"1983-02-18", albums:['Save The World', 'Until Now', 'One']},
     {name: "Armin Van Buuren", genre:"Trance", dob:"1978-02-11", albums:['Intense', 'Imagine', 'Mirage']}
   ];
