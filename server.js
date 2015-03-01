@@ -11,7 +11,8 @@ var artists = [
   {name: "James Blunt", genre:"Pop", dob:"03-20-1977"},
   {name: "Imagine Dragons", genre:"Pop-Rock", dob:"09-10-1983"},
   {name: "Above & beyond", genre:"Progressive Trance", dob:"22-10-1976"},
-  {name: "Swidish House Mafia", genre:"House", dob:"22-10-1976"}];
+  {name: "Swidish House Mafia", genre:"House", dob:"22-10-1976"},
+  {name: "Armin Van Buuren", genre:"Trance", dob:"2-11-1978"}];
 
 app.get('/app/artists', function (req, res) {
     res.jsonp(artists);
