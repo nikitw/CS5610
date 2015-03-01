@@ -20,7 +20,7 @@ app.get('/app/artists', function (req, res) {
 app.ip = process.env.OPENSHIFT_NODEJS_IP;
 if(app.ip === undefined)
   app.ip = '127.0.0.1';
-app.port = '8888';
+app.port = '8080';
 
 app.listen(app.port, app.ip, function () {
   console.log('server started at '+app.ip+':'+app.port);
