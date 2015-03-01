@@ -1,0 +1,144 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title>NodeJS Persistence</title>
+		<link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="css/exp_base.css" rel="stylesheet" />
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+		<script src="https://code.angularjs.org/1.2.26/angular-route.js"></script>
+	</head>
+	<body ng-app="PrimeBoxApp">
+    <div class="bg"></div>
+		<div class="container">
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">PrimeBox
+	          </a>
+	        </div>
+	        <!--/.nav-collapse -->
+	      </div>
+	    </nav>
+
+			<div ng-view>
+			</div>
+
+      <div class="exp-part">
+        <h1>About</h1>
+        <p>The application fetches data from a NodeJS app server that it resides in. It is built on previous exp and allows to view
+					artists from the list. This application is persistent as the data is stored and retrieved from a NodeJS app server. Ng-Route module
+					is used for displaying an artists in different page stored in partials directory.
+        </p>
+
+        <b>app.js</b>
+        <p>Application JS runs on NodeJS server as <code>\>$ node server.js</code> listening to port# <code>8080</code>. It serves Get requests to server.
+        </p>
+        <pre>
+          <code>
+	var express = require('express');
+	var bodyParser = require('body-parser');
+	var multer = require('multer');
+	var app = express();
+
+	app.use(express.static(__dirname + "/public/"))
+	app.use(bodyParser.json()); // for parsing application/json
+	app.use(bodyParser.urlencoded({ extended: true }));
+	app.use(multer());
+
+
+	app.get('/', function (req, res) {
+	  res.render("index.html");
+	});
+
+	var artists = [ ... ];
+
+	app.get('/app/artists', function (req, res) {
+	    res.jsonp(artists);
+	});
+
+	app.get('/app/artists/:id', function (req, res) {
+  		res.jsonp(artists[req.params.id]);
+	});
+
+	app.post('/app/artists', function (req, res) {
+	    artists.push(req.body);
+	    res.jsonp(artists);
+	});
+
+	app.delete('/app/artists/:id', function (req, res) {
+	    var index = req.params.id;
+	    artists.splice(index, 1);
+	    res.jsonp(artists);
+	});
+
+	app.put('/app/artists/:id', function (req, res) {
+	    var index = req.params.id;
+	    artists[index] = req.body;
+	    res.jsonp(artists);
+	});
+
+	app.ip = process.env.OPENSHIFT_NODEJS_IP;
+	app.port = '8080';
+
+	app.listen(app.port, app.ip, function () {
+	  console.log('server started at '+app.ip+':'+app.port);
+	});
+
+          </code>
+        </pre>
+
+        <b>Service ajax</b>
+        <p>Service requests get an artist using it's id over the url /app/artists/ REST API. callback the requesting method
+        to update the table shown above.</p>
+        <pre>
+          <code>
+	lfmAPI.getArtistById = function(id, callback) {
+	    $http.jsonp("http://nodejs-cs6240nwaghela.rhcloud.com/app/artists/"+id+"?callback=JSON_CALLBACK")
+	      .success(function(data){
+	        callback(data);
+	      });
+	};
+          </code>
+        </pre>
+      </div>
+			<div class="exp-part">
+				<h1>Source</h1>
+          <ul>
+            <li>
+                Click <a href="../../fileview/Default.aspx?~/experiments/week6_exps/exp5.html">here</a> to view HTML source.
+            </li>
+            <li>
+                Click <a href="../../fileview/Default.aspx?~/experiments/week6_exps/js/exp5.js">here</a> to view JS source.
+            </li>
+            <li>
+                Click <a href="../../fileview/Default.aspx?~/experiments/week6_exps/js/exp5-controller.js">here</a> to view controller JS source.
+            </li>
+            <li>
+                Click <a href="../../fileview/Default.aspx?~/experiments/week6_exps/js/exp5-services.js">here</a> to view services JS source.
+            </li>
+						<li>
+                Click <a href="../../fileview/Default.aspx?~/experiments/nodejs/server.js">here</a> to view NodeJS app source.
+            </li>
+          </ul>
+          <h1>Reference</h1>
+          <a href="http://w3schools.com" target="_blank">www.w3schools.com</a></br>
+          <a href="http://www.toptal.com/angular-js/a-step-by-step-guide-to-your-first-angularjs-app" target="_blank">www.toptal.com</a>
+			</div>
+		</div>
+	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="../js/parallax.js"></script>
+	<script src="js/exp5.js"></script>
+  <script src="js/exp5-services.js"></script>
+	<script src="js/exp5-controller.js"></script>
+</html>

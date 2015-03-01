@@ -48,7 +48,7 @@ app.controller('homeCtrl', function($scope, $location, lfmAPIservice, userServic
 
 	$scope.search = lfmAPIservice.getArtists();
 
-	
+
 	$scope.searchArtist = function() {
 		$scope.search = lfmAPIservice.getArtists();
 	};
@@ -91,7 +91,7 @@ app.controller('detailsCtrl', function($scope, $routeParams, $location,userServi
 			$location.path('/login');
 			return;
 		}
-		
+
   		$scope.details = lfmAPIservice.getArtistByName($routeParams.artist);
   });
 
@@ -122,7 +122,7 @@ app.controller('userCtrl', function($scope, $location , userService) {
 
   		if(userService.showPass)
   			$scope.passwd = $scope.currUser.password;
-  		
+
   		$scope.showPass = function () {
   			userService.passVisible(true);
   			$scope.passwd = $scope.currUser.password;

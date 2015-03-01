@@ -1,0 +1,21 @@
+<div class="exp-part" ng-controller="detailsCtrl">
+  <div class="row">
+    <div class="col-sm-8"><h1>{{artist.name}}</h1></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4"> Date of Birth </div>
+    <div class="col-sm-4"><strong>{{artist.dob}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4"> Genre </div>
+    <div class="col-sm-8"><strong>{{artist.genre}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8"><h4>Albums</h4></div>
+    <div class="col-sm-8">
+      <ul>
+        <li ng-repeat="album in artist.albums">{{album}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

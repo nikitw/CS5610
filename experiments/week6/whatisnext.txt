@@ -1,0 +1,6 @@
+../week6_exps/exp1.html		NodeJS & Express   [get]
+../week6_exps/exp2.html		NodeJS Persistence [“, post]
+../week6_exps/exp3.html		NodeJS Persistence [“, delete]
+../week6_exps/exp4.html		NodeJS Persistence [“, put]
+../week6_exps/exp5.html		NodeJS Persistence [“, ngRoute]
+
