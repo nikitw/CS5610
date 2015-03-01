@@ -20,26 +20,45 @@ app.get('/', function (req, res) {
 });
 
 var artists = [
-  {name: "Coldplay", genre:"Rock", dob:"1978-02-17"},
-  {name: "James Blunt", genre:"Pop", dob:"1977-03-20"},
-  {name: "Imagine Dragons", genre:"Pop-Rock", dob:"1983-09-10"},
-  {name: "Above & beyond", genre:"Progressive Trance", dob:"1976-22-10"},
-  {name: "Swidish House Mafia", genre:"House", dob:"1983-02-18"},
-  {name: "Armin Van Buuren", genre:"Trance", dob:"1978-02-11"}];
+    {name: "Coldplay", genre:"Rock", dob:"1978-02-17", albums:['Parachutes', 'X & Y', 'Ghost Stories']},
+    {name: "James Blunt", genre:"Pop", dob:"1977-03-20", albums:['Back To Beldam', 'Moon Landing']},
+    {name: "Imagine Dragons", genre:"Pop-Rock", dob:"1983-09-10", albums:['Continued Silence EP', 'Demons', 'Night Visions']},
+    {name: "Above & beyond", genre:"Progressive Trance", dob:"1976-22-10", albums:['Group Therapy', 'TriState', 'Acoustic']},
+    {name: "Swidish House Mafia", genre:"House", dob:"1983-02-18", albums:['Save The World', 'Until Now', 'One']},
+    {name: "Armin Van Buuren", genre:"Trance", dob:"1978-02-11", albums:['Intense', 'Imagine', 'Mirage']}
+  ];
 
 app.get('/app/artists', function (req, res) {
     res.jsonp(artists);
 });
 
-app.post('/app/artists/add', function (req, res) {
-    artists.push(req.body);
+app.get('/app/artists/:id', function (req, res) {
+    res.jsonp(artists[req.params.id]);
+});
+
+app.post('/app/artists', function (req, res) {
+    var body = req.body;
+    if(body.name && body.dob)
+      artists.push(req.body);
+    res.jsonp(artists);
+});
+
+app.delete('/app/artists/:id', function (req, res) {
+    var index = req.params.id;
+    artists.splice(index, 1);
+    res.jsonp(artists);
+});
+
+app.put('/app/artists/:id', function (req, res) {
+    var index = req.params.id;
+    artists[index] = req.body;
     res.jsonp(artists);
 });
 
 app.ip = process.env.OPENSHIFT_NODEJS_IP;
 if(app.ip === undefined) {
-  app.ip = '127.0.0.1';
-  app.port = '8888';
+    app.ip = '127.0.0.1';
+    app.port = '8888';
 } else
     app.port = '8080';
 
