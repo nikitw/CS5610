@@ -4,3 +4,4 @@
 ../experiments/week4/	AJAX WebAPI AngularJS
 ../experiments/week5/	AngularJS routing
 ../experiments/week6/	NodeJS Basics
+../experiments/week7/	NodeJS User Login & Session

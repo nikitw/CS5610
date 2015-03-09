@@ -1,0 +1,6 @@
+../week7_exps/exp1.html		NodeJS Server side login
+../week7_exps/exp2.html		NodeJS New User Registeration
+../week7_exps/exp3.html		NodeJS Edit User details
+../week7_exps/exp4.html		NodeJS Forgot and change User Password
+../week7_exps/exp5.html		AngularJS Cookies and session
+
