@@ -1,0 +1,184 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title>NodeJS edit User details</title>
+		<link href="css/exp_base.css" rel="stylesheet" />
+		<link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/bootstrap-theme.min.css" rel="stylesheet" />
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+		<script src="https://code.angularjs.org/1.2.26/angular-route.js"></script>
+		<script src="https://code.angularjs.org/1.4.0-beta.5/angular-cookies.min.js"></script>
+	</head>
+	<body ng-app="PrimeBoxApp">
+		<!-- SCRIPTS -->
+		<div class="bg"></div>
+
+			<!-- NAVBAR -->
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">PrimeBox
+	          </a>
+					</div>
+					<div id="navbar" ng-controller="navCtrl" class="collapse navbar-collapse">
+	          <ul class="nav navbar-nav">
+	            <li class="home" ng-show="currUser"><a href="#/home">Home</a></li>
+	          </ul>
+			  		<ul class="nav navbar-nav navbar-right">
+							<li class="user" ng-show="currUser"><a href="#/profile">[{{currUser.name}}]</a></li>
+	            <li class="login" ng-hide="currUser"><a href="#/login">Login</a></li>
+	            <li class="logout" ng-show="currUser" ng-click="logout()"><a href="#/logout">Logout</a></li>
+	          </ul>
+	        </div>
+	      </div>
+	    </nav> <!--/.nav-collapse -->
+
+			<div class="margin-top-10 container">
+			<div class="exp-part" ng-view>
+			</div>
+
+      <div class="exp-part">
+        <h1>About</h1>
+        <p>This experiment have introduced a feature in user login flow, User Session, The session is managed by angular cookies.
+					 After logging in, the $cookie value is set for user and on every new tab or browser refresh it loads the user from cookies
+					 if present, else it routes back to the login page.
+        </p>
+
+        <b>app.js</b>
+        <p>Application JS runs on NodeJS server as <code>\>$ node app.js</code> listening to port# <code>8080</code>. It serves Get requests to server.
+        </p>
+        <pre>
+          <code>
+
+	app.post('/app/chpassrequest', function (req, res) {
+	    var username = req.body.email;
+	    var user = new User(null,null,null,null,null);
+	    for (var c in CHPASS)
+	      if(CHPASS[c].username == username) {
+	        CHPASS.splice(c, 1);
+	        break;
+	      }
+	    var chpass = new ChPass(username);
+	    var response = {...};
+			...
+	    // send email
+	    res.jsonp(response);
+	});
+
+	app.get('/app/chpassemail/:id', function(req, res) {
+	  var username = req.params.id;
+	  var chpass = null;
+	  var response = {...};
+		...
+	  res.jsonp(response);
+	});
+
+	app.get('/app/chpassconfirm/:hash', function (req, res) {
+	    var hash = req.params.hash;
+	    var chapss = null;
+	    var response = {...};
+	    ...
+	    res.jsonp(response);
+	});
+
+	app.get('/app/chpass/:id', function (req, res) {
+	    var username = req.params.id;
+	    var chpass = null;
+	    var response = {...};
+			...
+	    res.jsonp(response);
+	});
+          </code>
+        </pre>
+        <b>JSON array for change password requests</b>
+        <p>This array serves as a repository for artists and it persists till the server tenure.</p>
+        <pre>
+          <code>
+	Hash is produces using MD5 library for nodeJS
+
+	CHPASS = [
+		{hash:"71093ndw098d30912hd09812", username:"admin"},
+		{hash:"71093ndw098d30912hd08i21", username:"alice"}
+	];
+          </code>
+        </pre>
+        <b>Service ajax</b>
+        <p>Service request fetches data from the REST API and callback the requesting method
+        and routes to homepage when login successful or displays an error if the username already exists.
+				 It stores the current user in cookies.</p>
+        <pre>
+          <code>
+services.factory('userService', function($http, $cookies) {
+  ...
+	us.currUser = ($cookies.user)? JSON.parse($cookies.user) : null;
+	us.showPass = false;
+
+
+	us.login = function (user) {
+	if($cookies.user) {
+		return JSON.parse($cookies.user);
+	}
+	$http.jsonp(URL+"login? ..."
+	+"&callback=JSON_CALLBACK")
+		.success(function(auser) {
+			if(!auser.err) {
+				user.success(auser);
+				us.currUser = auser;
+				$cookies.user = JSON.stringify(auser);
+			} else
+				user.error(new Error(auser.err, auser.errmsg));
+		});
+	};
+
+	us.logout = function () {
+		us.currUser = null;
+		delete $cookies.user;
+	};
+  ...
+
+  return us;
+});
+          </code>
+        </pre>
+      </div>
+			<div class="exp-part">
+				<h1>Source</h1>
+          <ul>
+            <li>
+                Click <a href="../../fileview/Default.aspx?~/experiments/week7_exps/exp5.html">here</a> to view HTML source.
+            </li>
+            <li>
+                Click <a href="../../fileview/Default.aspx?~/experiments/week7_exps/js/exp5.js">here</a> to view JS source.
+            </li>
+            <li>
+                Click <a href="../../fileview/Default.aspx?~/experiments/week7_exps/js/exp5-controller.js">here</a> to view controller JS source.
+            </li>
+            <li>
+                Click <a href="../../fileview/Default.aspx?~/experiments/week7_exps/js/exp5-services.js">here</a> to view services JS source.
+            </li>
+						<li>
+                Click <a href="../../fileview/Default.aspx?~/nodejs/server.js">here</a> to view NodeJS app source.
+            </li>
+          </ul>
+          <h1>Reference</h1>
+          <a href="http://w3schools.com" target="_blank">www.w3schools.com</a></br>
+          <a href="http://www.toptal.com/angular-js/a-step-by-step-guide-to-your-first-angularjs-app" target="_blank">www.toptal.com</a>
+			</div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	  <script src="../js/parallax.js"></script>
+		<script src="js/exp5.js"></script>
+	  <script src="js/exp5-services.js"></script>
+		<script src="js/exp5-controller.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+	</body>
+</html>

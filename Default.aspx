@@ -17,21 +17,21 @@
 <style type="text/css">
 
     ul.master_navigation {
-	    background: #efefef; 
-	    background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);  
-	    background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
-	    background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 
+	    background: #efefef;
+	    background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);
+	    background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%);
+	    background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%);
 	    box-shadow: 0px 0px 9px rgba(0,0,0,0.15);
 	    padding: 0 20px;
-	    border-radius: 5px;  
+	    border-radius: 5px;
 	    list-style: none;
 	    position: relative;
 	    display: inline-table;
         max-width:960px;
     }
 	ul.master_navigation:after {
-		content: ""; 
-        clear: both; 
+		content: "";
+        clear: both;
         display: block;
 	}
 
@@ -47,7 +47,7 @@
 		ul.master_navigation li:hover a {
 			color: #fff;
 		}
-	
+
 	ul.master_navigation li a {
 		display: block; padding: 15px 10px;
 		color: #757575; text-decoration: none;
@@ -63,7 +63,7 @@
     }
 
 	ul.master_navigation ul li {
-		float: none; 
+		float: none;
 		border-top: 1px solid #6b727c;
 		border-bottom: 1px solid #575f6a;
 		position: relative;
@@ -72,7 +72,7 @@
 		ul.master_navigation ul li a {
 			padding: 15px 40px;
 			color: #fff;
-		}	
+		}
 			ul.master_navigation ul li a:hover {
 				background: #4b545f;
 			}
@@ -128,7 +128,7 @@
 
     .expbar ul {
         max-width:960px;
-        box-shadow: none;        
+        box-shadow: none;
     }
 
 </style>
@@ -156,25 +156,25 @@
     }
 
     .navbar {
-       
+
         margin: auto;
     }
 
     .zindex3, .zindex3 ul, .zindex3 ul li, .zindex3 ul li a {
         z-index:3;
     }
-    
+
     .zindex4, .zindex4 ul, .zindex4 ul li, .zindex4 ul li a {
         z-index:4;
     }
-    
+
     html {
         background:url(http://icam1990.com/wp-content/uploads/2014/11/Boston_Skyline_as_Seen_From_Cambridge.jpg) no-repeat center center fixed;
-        
+
         -moz-background-size: cover;
         -o-background-size: cover;
         background-size: cover;
-        
+
     }
 
     .right {
@@ -200,12 +200,12 @@
         display: none;
     }
 
-    
+
     @media screen and (max-width: 500px) {
         .empty {
            border:0px;
            height:0px;
-           margin:0px; 
+           margin:0px;
         }
     }
 
@@ -289,7 +289,7 @@
 	        position: absolute; left:70%; right:0; top:100%;
         }
     }
-    
+
     @media screen and (min-width:411px) and (max-width:601px) {
 
         .container {
@@ -309,7 +309,7 @@
 	        position: absolute; left: 50%; right:0; top:100%;
         }
     }
-    
+
     @media screen and (max-width:410px) {
         .container {
             width:300px;
@@ -336,7 +336,7 @@
             width: 190px;
         }
     }
-    
+
     .smalltext {
         font-size:small;
     }
@@ -348,7 +348,7 @@
     }
 
     .desc {
-     
+
     }
 
     p.emailid {
@@ -389,7 +389,7 @@
                 <li><a href="autofile.aspx" target="_blank">AutoFile</a></li>
                 <li><a href="images/autoimage.aspx" target="_blank">Images</a></li>
                 <li><a href="blog/" target="_blank">Blog</a></li>
-            
+
             </ul>
         </div>
 
@@ -469,7 +469,7 @@
             </ul>
         </div>
     </div>
-    
+
     <div class="translucent profile">
         <div class="profile_image">
             <img alt="Nikit" class="thumbnail" src="images/profile/nikit_waghela.jpg" />
@@ -484,15 +484,15 @@
     </div>
 
     <br />
-    
+
     <div class="expbar zindex3">
         <ul class="master_navigation">
             <li><a href="exps/index.htm" target="_blank">Experiments</a></li>
             <li><a href="#">Projects</a></li>
-            <li><a href="docs/" target="_blank">Documents</a></li>
+            <li><a href="https://github.com/waghelanikit/CS5610" target="_blank">GitHub</a></li>
         </ul>
     </div>
-<div class="translucent"> 
+<div class="translucent">
     <H1>
         More features coming soon!
     </H1>

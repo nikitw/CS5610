@@ -1,0 +1,22 @@
+<div class="loading" ng-show="loading">
+ <h2>Loading</h2>
+</div>
+
+<pre ng-show="err"> <code ng-bind="err.message"></code></pre>
+	<form class="form-signin" >
+   <h2 class="form-signin-heading">User Details</h2>
+   <label for="inputEmail" class="sr-only">Email address</label>
+   <input ng-model="user.username" type="email" id="inputEmail" class="form-control" placeholder="Email address / Username" required autofocus>
+   <label for="inputName" class="sr-only">Name</label>
+   <input ng-model="user.name" type="text" id="inputName" class="form-control" placeholder="Name" required>
+   <label for="inputPassword" class="sr-only">Password</label>
+   <input ng-model="user.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+   <label for="cPassword" class="sr-only">Confirm Password</label>
+   <input ng-model="cpassword" type="password" id="cPassword" class="form-control" placeholder="Confirm Password" required>
+   <label for="hint" class="sr-only">Password Hint</label>
+   <input ng-model="user.hint" type="text" id="hint" class="form-control" placeholder="Password Hint" required>
+
+   <button ng-click="register()" class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+
+   OR <a href="#/login">Login</a>
+</form>

@@ -1,0 +1,64 @@
+<div class="loading" ng-show="loading">
+ <h2>Loading</h2>
+</div>
+
+<pre ng-show="err"> <code ng-bind="err.message"></code></pre>
+<div ng-hide="confirmed">
+  <form class="form-signin" ng-hide="response">
+     <h2 class="form-signin-heading">Username</h2>
+     <label for="inputEmail" class="sr-only">Email address</label>
+     <input ng-model="username" type="email" id="inputEmail" class="form-control" placeholder="Email address / Username" required autofocus>
+
+     <button ng-click="chpass()" class="btn btn-lg btn-primary btn-block" type="submit">Request</button>
+
+  </form>
+
+  <div ng-show="response">
+    <div>
+      An email has been sent to <span ng-bind="response.body.username"></span> account, please click on the confirmation link in it.
+      You can also view a copy of the email
+      <button ng-click="viewEmail(response.body.username)" class="btn btn-xs btn-primary" type="button">here</button>
+      <p><code>{Experimental, since we can't send emails at this time. The request is memoized in Server, hence refreshing this page for the same username will know that the request has already been issued and is pending confirmation. just view the email and confirm, wait for 3 seconds and the page will refresh automatically.}
+      </code></p>
+    </div>
+
+    <div ng-show="response.body.email">
+      <h4> Email Message: </h4>
+      <div class="row">
+        <div class="col-sm-2 b">To</div>
+        <div class="col-sm-8">{{response.body.email.to}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2 b">From</div>
+        <div class="col-sm-8">{{response.body.email.from}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2 b">Subject</div>
+        <div class="col-sm-8">{{response.body.email.subject}}</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-2 b">Message</div>
+        <div class="col-sm-8">
+          <div><pre>{{response.body.email.msgbody}}</pre></div>
+          <p><a href="{{response.body.email.url}}" ng-click="loadChpassForm()" target="_blank"> Confirm request.</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-show="confirmed">
+  <form class="form-signin" ng-hide="response">
+     <h2 class="form-signin-heading">Password</h2>
+     <label for="inputPassword" class="sr-only">New Password</label>
+     <input ng-model="user.password" type="password" id="inputPassword" class="form-control" placeholder="New Password" required autofocus>
+     <label for="cPassword" class="sr-only">Confirm Password</label>
+     <input ng-model="cpassword" type="password" id="cPassword" class="form-control" placeholder="Confirm Password" required >
+     <label for="hint" class="sr-only">Hint</label>
+     <input ng-model="user.hint" type="text" id="hint" class="form-control" placeholder="Hint" required >
+
+     <button ng-click="updatePassword()" class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+  </form>
+</div>
+
+<a href="#/login">Login</a>

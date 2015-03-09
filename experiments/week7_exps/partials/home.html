@@ -1,0 +1,46 @@
+ <div class="exp-part" ng-controller="homeCtrl">
+
+  <div class="loading" ng-show="loading">
+    <h2>Loading</h2>
+  </div>
+
+  <h1>Artists</h1>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date of Birth</th>
+        <th colspan=4>Genre</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        <tr class="addArtist">
+          <td>
+            <input type="text" ng-model="artist.name" placeholder="Artist name"/>
+          </td>
+          <td>
+            <input type="date" ng-model="artist.dob" />
+          </td>
+          <td>
+            <input type="text" ng-model="artist.genre" placeholder="Genre"/>
+          </td>
+          <td>
+            <div class="btn glyphicon glyphicon-ok pull-right" ng-show="edit" ng-click="editArtist()"></div>
+            <div class="btn glyphicon glyphicon-plus pull-right" ng-hide="edit" ng-click="addArtist()"></div>
+          </td>
+        </tr>
+
+      <tr ng-repeat="artist in artists">
+        <td>{{artist.name}}</td>
+        <td>{{artist.dob}}</td>
+        <td>{{artist.genre}}</td>
+        <td>
+          <div class="btn pull-right glyphicon glyphicon-pencil" ng-click="selectArtist($index)"></div>
+          <div class="btn pull-right glyphicon glyphicon-remove" ng-click="removeArtist($index)"></div>
+          <a href="#/artists/{{$index}}"><div class="btn pull-right glyphicon glyphicon-eye-open"></div></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

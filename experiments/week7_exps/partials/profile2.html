@@ -1,0 +1,52 @@
+<h1>Welcome {{currUser.name}}
+	<span class="btn pull-right glyphicon glyphicon-pencil" ng-click="editUser()"></span>
+</h1>
+<pre ng-show="err"> <code ng-bind="err.message"></code></pre>
+<form class="form-signin" >
+	<div class="user-data-table">
+		<div class="row">
+			<div class="col-sm-3">
+				Name
+			</div>
+			<div class="col-sm-9">
+				<span ng-show="edit">
+					<label for="inputName" class="sr-only">Name</label>
+			   	<input ng-model="user.name" type="text" id="inputName" class="form-control" placeholder="Name" required>
+				</span>
+				<span ng-bind="currUser.name" ng-hide="edit"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				Username
+			</div>
+			<div class="col-sm-9">
+				<span ng-show="edit">
+					{{currUser.username}}
+				</span>
+				<span ng-bind="currUser.username" ng-hide="edit"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				password
+			</div>
+			<div class="col-sm-9">
+				<a ng-click="showPass()" ng-hide="passwd">show password</a>
+				<span ng-bind="passwd" ng-hide="edit"></span>
+				<span ng-show="edit">
+					<label for="inputPassword" class="sr-only">Password</label>
+			   	<input ng-model="user.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+					<label for="confirmPassword" class="sr-only">Confirm Password</label>
+			   	<input ng-model="cpassword" type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+					<label for="hint" class="sr-only">Hint</label>
+			   	<input ng-model="user.hint" type="text" id="hint" class="form-control" placeholder="Hint" required>
+				</span>
+			</div>
+		</div>
+		<span ng-show="edit">
+			<button ng-click="update()" class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+			<button ng-click="cancelEdit()" class="btn btn-lg btn-primary btn-block" type="button">Cancel</button>
+		</span>
+	</div>
+</form>
