@@ -18,15 +18,16 @@ app.use(function(req, res, next) {
     next();
 });
 
-
+var URL;
 app.ip = process.env.OPENSHIFT_NODEJS_IP;
 if(app.ip === undefined) {
     app.ip = '127.0.0.1';
     app.port = '8888';
-} else
+    URL = "http://"+app.ip+":"+app.port;
+} else {
     app.port = '8080';
-
-var URL = "http://"+app.ip+":"+app.port;
+    URL = "http://nodejs-cs6240nwaghela.rhcloud.com";
+}
 
 app.get('/', function (req, res) {
   res.render("index.html");
