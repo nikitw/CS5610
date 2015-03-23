@@ -1,0 +1,130 @@
+<div>
+    <h1>About</h1>
+    <p>
+        This experiment demonstrates the mongobd fetch from the server. The list of artists is grabbed using a JSONP REST
+        API call to the node-mongo server and represented using an ng-repeat directive. The application is now capable of
+        adding new Artists and deleting them. It also enables the deletion of Documents and their internal subDocuments & subSubDocuments individually.
+    </p>
+    <h1>Client JS Code</h1>
+    <p>
+        below is the code used at client to get the data from node-mongo server. Delete on an Artist as a whole is straight forward
+         but deleting their sub and sub-sub Documents becomes a little tricky on the server.
+    </p>
+    <pre>
+        <code>
+var Artist = function() {
+    this.name = null;
+    this.dob = null;
+    this.albums = [{name:null, dor:null, songs:[{name: null, soundCloud:null}]}];
+    this.genre = [{type: null}];
+};
+
+$scope.artist = new Artist();
+$scope.removeArtist = function (id, index) {
+    lfmAPIservice.removeArtist(new Request(id, function(data) {
+        $scope.artists.splice(index, 1);
+    }, function(err) {
+        console.log(err);
+    }));
+};
+
+$scope.removeAlbum = function (id, aid, albums, index) {
+    lfmAPIservice.removeAlbum(new Request({artist: id, album: aid}, function(data) {
+        albums.splice(index, 1);
+    }, function(err) {
+        console.log(err);
+    }));
+};
+
+$scope.removeSong = function (id, aid, sid, songs, index) {
+    lfmAPIservice.removeSong(new Request({artist: id, album: aid, song: sid}, function(data) {
+        songs.splice(index, 1);
+    }, function(err) {
+        console.log(err);
+    }));
+};
+
+lfmAPI.removeArtist = function(request) {
+    $http.delete(URL+"artists/"+request.body)
+        .success(function(data) {
+            ...
+            request.success(data.data);
+        });
+};
+
+lfmAPI.removeAlbum = function(request) {
+    $http.delete(URL+"artists/"+request.body.artist+"/albums/"+request.body.album)
+        .success(function(data) {
+            ...
+            request.success(data.data);
+        });
+};
+
+lfmAPI.removeSong = function(request) {
+    $http.delete(URL+"artists/"+request.body.artist+"/albums/"+request.body.album+"/songs/"+request.body.song)
+        .success(function(data) {
+            ...
+            request.success(data.data);
+        });
+};
+        </code>
+    </pre>
+    <h1>Server JS Code</h1>
+    <p>
+        The below code is capable to delete an artist or its sub - sub documents. The delete is a hard delete from the
+        the schema and can not be recovered. Spotting the item to be deleted is done using the 'id' property of
+        every document allotted by MongoSchema.
+    </p>
+    <pre>
+        <code>
+
+var Artist = db.model('artists', artistSchema);
+...
+app.delete('/artists/:id', function(req, res) {
+    Artist.findOneAndRemove({_id: req.params.id}, function(err, doc) {
+        ...
+        res.jsonp({data: doc});
+    });
+});
+
+app.delete('/artists/:id/albums/:aid/songs/:sid', function(req, res) {
+    Artist.findOne({_id: req.params.id}, function(err, doc) {
+        ...
+        var songs = doc.albums.id(req.params.aid).songs;
+        songs.id(req.params.sid).remove(function(err, doca) {
+            ...
+            doc.save(function(err, docs) {
+                ...
+                res.jsonp({data: doc});
+            });
+        });
+    });
+});
+...
+        </code>
+    </pre>
+</div>
+
+<div>
+    <h1>Source</h1>
+    <ul>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week8_exps/exp3.html">here</a> to view HTML source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week8_exps/js/exp3.js">here</a> to view JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week8_exps/js/exp3-controller.js">here</a> to view controller JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week8_exps/js/exp3-services.js">here</a> to view services JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/nodejs/mongo-app.js">here</a> to view NodeJS app source.
+        </li>
+    </ul>
+    <h1>Reference</h1>
+    <a href="http://w3schools.com" target="_blank">www.w3schools.com</a></br>
+    <a href="http://www.toptal.com/angular-js/a-step-by-step-guide-to-your-first-angularjs-app" target="_blank">www.toptal.com</a>
+</div>

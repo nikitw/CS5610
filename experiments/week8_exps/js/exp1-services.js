@@ -12,15 +12,8 @@ Error.prototype.printConsole = function() {
   console.log("\tend");
 };
 
-var User = function(username, password, hint, admin) {
-  this.username = username;
-  this.password = password;
-  this.hint = hint;
-  this.admin = admin;
-};
-
-var URL = "http://nodejs-cs6240nwaghela.rhcloud.com/app/";
-//var URL = "http://localhost:8888/app/";
+var URL = "http://nodejs-cs6240nwaghela.rhcloud.com/primebox/";
+//var URL = "http://localhost:8888/primebox/";
 
 services.factory('lfmAPIservice', function($http) {
 
@@ -29,7 +22,13 @@ services.factory('lfmAPIservice', function($http) {
     lfmAPI.getAllArtists = function(callback) {
         $http.jsonp(URL+"artists?callback=JSON_CALLBACK")
           .success(function(data){
-            callback(data);
+                for(var d in data.data) {
+                    data.data[d].dob = new Date(data.data[d].dob).toDateString();
+                    for(var dt in data.data[d].albums) {
+                        data.data[d].albums[dt].dor = new Date(data.data[d].albums[dt].dor).toDateString();
+                    }
+                }
+            callback(data.data);
           });
     };
 
@@ -62,41 +61,4 @@ services.factory('lfmAPIservice', function($http) {
     };
 
     return lfmAPI;
-  });
-
-services.factory('userService', function($http) {
-    var us = {};
-    us.currUser = null;
-    us.showPass = false;
-
-    us.getCurrUser = function () {
-        return this.currUser;
-    };
-
-    us.login = function (request) {
-        $http.jsonp(URL+"login?username="+request.username
-        +"&password="+request.password
-        +"&callback=JSON_CALLBACK")
-          .success(function(data) {
-            if(data) {
-              request.success(data);
-              us.currUser = data;
-            } else
-              request.error(new Error(701, "login failed!"));
-          });
-    };
-
-    us.logout = function () {
-      us.currUser = null;
-    };
-
-    us.passVisible = function (status) {
-        us.showPass = status;
-    };
-
-    us.isPassVisible = function () {
-      return us.showPass;
-    };
-
-    return us;
   });

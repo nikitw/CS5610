@@ -1,0 +1,52 @@
+<h1>Artists</h1>
+<div id="row-container">
+    <div class="artist-block" ng-show="exp2">
+        <h3 ng-if="editIndex == null">Add Artist Details</h3>
+        <h3 ng-if="editIndex != null">Edit Artist Details</h3>
+        <form id="add-edit-artist">
+            <div class="name">Artist Name: <input ng-model="artist.name"/></div>
+            <div class="date">Date of birth: <input ng-model="artist.dob" type="date"></div>
+            <div class="in-block">
+                Genre:
+                <span ng-show="exp5" class="glyphicon glyphicon-plus pull-right" ng-click="insertGenre(artist.genre)"></span>
+                <div class="name" ng-repeat="genre in artist.genre">
+                    <input ng-model="genre.type">
+                    <span ng-if="$index != 0" ng-show="exp5" class="glyphicon glyphicon-remove" ng-click="removeGenre(artist.genre, $index)"></span>
+                </div>
+            </div>
+            <div class="in-block" ng-repeat="album in artist.albums">
+                <span class="name">Album Name: <input ng-model="album.name"/></span>
+                <span ng-if="$index != 0" ng-show="exp5" class="glyphicon glyphicon-remove pull-right" ng-click="removeAlbum(artist.albums, $index)"></span>
+                <span ng-if="$index + 1 == artist.albums.length" ng-show="exp5" class="glyphicon glyphicon-plus pull-right" ng-click="insertAlbum(artist.albums)"></span>
+                <div class="date">Date of release: <input type="date" ng-model="album.dor"></div>
+                <div class="in-block" ng-repeat="song in album.songs">
+                    <span class="name">Song: <input ng-model="song.name"></span>
+                    <span ng-if="$index != 0" ng-show="exp5" class="glyphicon glyphicon-remove pull-right" ng-click="removeSong(album.songs, $index)"></span>
+                    <span ng-if="$index + 1 == album.songs.length" ng-show="exp5" class="glyphicon glyphicon-plus pull-right" ng-click="insertSong(album.songs)"></span>
+                    <div class="link">URL: <input ng-model="song.soundCloud"></div>
+                </div>
+            </div>
+            <input type="submit" ng-click="addArtist()">
+            <button ng-click="cancelEdit()" class="cancel" ng-if="editIndex != null">cancel</button>
+        </form>
+    </div>
+    <div ng-repeat="artist in artists" class="artist-block" ng-show="exp1">
+        <span class="name">{{artist.name}}</span>
+        <span ng-show="exp3" class="glyphicon glyphicon-remove pull-right" ng-click="removeArtist(artist._id, $index)"></span>
+        <span ng-show="exp4" class="glyphicon glyphicon-pencil pull-edit" ng-click="editArtist(artist, $index)"></span>
+        <div class="date">Date of birth: {{artist.dob}}</div>
+        <div class="in-block">
+            <span ng-repeat="genre in artist.genre" class="name spacing">{{genre.type}}</span>
+        </div>
+        <div ng-repeat="album in artist.albums" class="in-block">
+            <span class="name">{{album.name}}</span>
+            <span ng-show="exp3" class="glyphicon glyphicon-remove pull-right" ng-click="removeAlbum(artist._id, album._id, artist.albums, $index)"></span>
+            <div class="date">Date of release: {{album.dor}}</div>
+            <div ng-repeat="song in album.songs" class="in-block">
+                <span class="name">{{song.name}}</span>
+                <span ng-show="exp3" class="glyphicon glyphicon-remove pull-right" ng-click="removeSong(artist._id, album._id, song._id, album.songs, $index)"></span>
+                <div class="link">{{song.soundCloud}}</div>
+            </div>
+        </div>
+    </div>
+</div>

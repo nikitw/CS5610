@@ -5,3 +5,4 @@
 ../experiments/week5/	AngularJS routing
 ../experiments/week6/	NodeJS Basics
 ../experiments/week7/	NodeJS User Login & Session
+../experiments/week8/	NodeJS MongoDB [INSERT SELECT UPDATE DELETE]
