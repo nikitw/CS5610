@@ -1,0 +1,92 @@
+<div>
+    <h1>About</h1>
+    <p>
+        This experiment demonstrates the mongobd fetch from the server. The list of artists is grabbed using a JSONP REST
+        API call to the node-mongo server and represented using an ng-repeat directive. The application is now capable of
+        adding new Artists to the list and that is achieved using JSON POST REST call to the node-mongo server. The artist
+        object is represented in the same schema as it is on the MongoSchema to avoid data ambiguity and manipulations.
+    </p>
+    <h1>Client JS Code</h1>
+    <p>
+        below is the code used at client to get the data from node-mongo server. The request body contains the client side
+        Artist object which will be tries converting to ArtistSchema on server. If this action is successful, the artist
+        is saved and returned in the response.data else and error message is reported as response.err.
+    </p>
+    <pre>
+        <code>
+var Artist = function() {
+    this.name = null;
+    this.dob = null;
+    this.albums = [{name:null, dor:null, songs:[{name: null, soundCloud:null}]}];
+    this.genre = [{type: null}];
+};
+
+$scope.artist = new Artist();
+$scope.addArtist = function () {
+    lfmAPIservice.addArtist(new Request($scope.artist, function(data) {
+        $scope.artists.push(data);
+    }, function(err) {
+        console.log(err);
+    }));
+}
+
+lfmAPI.addArtist = function(request) {
+    $http.post(URL+"artists", request.body)
+        .success(function(data) {
+            ...
+            request.success(data.data);
+        }
+    });
+};
+        </code>
+    </pre>
+    <h1>Server JS Code</h1>
+    <p>
+        below is the code that adds the new Artist to mongodb and gets the newly created Artist to respond to the client
+         If there is no artist body provided by the REST call, the error is sent back to the client in response.
+    </p>
+    <pre>
+        <code>
+
+var Artist = db.model('artists', artistSchema);
+
+app.post('/artists', function(req, res) {
+    if(!req.body) {
+        res.jsonp({err: new Error('no artist object found')});
+        return;
+    }
+    var artist = new Artist(req.body);
+    artist.save(function(err, doc) {
+        if(err || !doc)
+            res.jsonp({err: new Error('no artist added!')});
+        else
+            res.jsonp({data: doc});
+    });
+});
+        </code>
+    </pre>
+</div>
+
+<div>
+    <h1>Source</h1>
+    <ul>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week8_exps/exp2.html">here</a> to view HTML source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week8_exps/js/exp2.js">here</a> to view JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week8_exps/js/exp2-controller.js">here</a> to view controller JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week8_exps/js/exp2-services.js">here</a> to view services JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/nodejs/mongo-app.js">here</a> to view NodeJS app source.
+        </li>
+    </ul>
+    <h1>Reference</h1>
+    <a href="http://w3schools.com" target="_blank">www.w3schools.com</a></br>
+    <a href="http://www.toptal.com/angular-js/a-step-by-step-guide-to-your-first-angularjs-app" target="_blank">www.toptal.com</a>
+</div>
