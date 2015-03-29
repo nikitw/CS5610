@@ -5,10 +5,11 @@ app.controller('homeCtrl', function($scope, $location, lfmAPIservice) {
     $scope.exp1 = true;
     $scope.exp2 = true;
     $scope.exp3 = true;
-    $scope.exp4 = true;
     $scope.exp5 = true;
+    $scope.uiSearch = true;
 
     $scope.artist = new Artist();
+    $scope.filter = lfmAPIservice.getFilter();
 
     $scope.artists = lfmAPIservice.getAllArtists(function (data) {
         $scope.artists = data;
@@ -49,12 +50,20 @@ app.controller('homeCtrl', function($scope, $location, lfmAPIservice) {
         }));
     };
 
+
     $scope.removeSong = function (id, aid, sid, songs, index) {
         lfmAPIservice.removeSong(new Request({artist: id, album: aid, song: sid}, function(data) {
             songs.splice(index, 1);
         }, function(err) {
             console.log(err);
         }));
+    };
+
+    $scope.searchUI = function() {
+        lfmAPIservice.searchArtistsUI($scope.filter, function(data) {
+            $scope.artists = data;
+            //$scope.artist = new Artist();
+        });
     };
 
     $scope.editIndex = null;

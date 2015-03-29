@@ -1,6 +1,22 @@
-<h1>Artists</h1>
+<div class="search-bar margin-top-10" ng-init="loadAlbums()">
+    <form>
+        <div class="input-group">
+            <div ng-if="advSearch" class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{searchTo? searchTo: "Album "}}<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="#/home" ng-click="setSearchTo('name')">Artist</a></li>
+                    <li><a href="#/albums" ng-click="setSearchTo('albums.name')">Album</a></li>
+                    <li><a href="#/songs" ng-click="setSearchTo('albums.songs.name')">Song</a></li>
+                </ul>
+            </div>
+            <input class="form-control input-group-addon align-left" ng-model="filter.keyword"/>
+            <span ng-if="uiSearch" ng-click="searchUI()" class="btn btn-info input-group-addon"><span class="glyphicon glyphicon-search"><button type="submit" class="hidden"></button></span></span>
+            <span ng-if="serverSearch" ng-click="search()" class="btn btn-info input-group-addon"><span class="glyphicon glyphicon-search"><button type="submit" class="hidden"></button></span></span>
+        </div>
+    </form>
+</div>
 <div id="row-container">
-    <div class="artist-block" ng-show="exp2">
+    <!--<div class="artist-block" ng-show="exp2">
         <h3 ng-if="editIndex == null">Add Artist Details</h3>
         <h3 ng-if="editIndex != null">Edit Artist Details</h3>
         <form id="add-edit-artist">
@@ -29,24 +45,17 @@
             <input type="submit" ng-click="addArtist()">
             <button ng-click="cancelEdit()" class="cancel" ng-if="editIndex != null">cancel</button>
         </form>
-    </div>
-    <div ng-repeat="artist in artists" class="artist-block" ng-show="exp1">
-        <span class="name">{{artist.name}}</span>
-        <span ng-show="exp3" class="glyphicon glyphicon-remove pull-right" ng-click="removeArtist(artist._id, $index)"></span>
-        <span ng-show="exp4" class="glyphicon glyphicon-pencil pull-edit" ng-click="editArtist(artist, $index)"></span>
-        <div class="date">Date of birth: {{artist.dob}}</div>
-        <div class="in-block">
-            <span ng-repeat="genre in artist.genre" class="name spacing">{{genre.type}}</span>
-        </div>
-        <div ng-repeat="album in artist.albums" class="in-block">
-            <span class="name">{{album.name}}</span>
-            <span ng-show="exp3" class="glyphicon glyphicon-remove pull-right" ng-click="removeAlbum(artist._id, album._id, artist.albums, $index)"></span>
-            <div class="date">Date of release: {{album.dor}}</div>
-            <div ng-repeat="song in album.songs" class="in-block">
-                <span class="name">{{song.name}}</span>
-                <span ng-show="exp3" class="glyphicon glyphicon-remove pull-right" ng-click="removeSong(artist._id, album._id, song._id, album.songs, $index)"></span>
-                <div class="link">{{song.soundCloud}}</div>
-            </div>
+    </div>-->
+
+    <div ng-repeat="album in albums" class="in-block">
+        <div class="date">Artist: {{album.artist_name}}</div>
+        <span class="name">{{album.name}}</span>
+        <span ng-show="exp3" class="glyphicon glyphicon-remove pull-right" ng-click="removeAlbum(album.artist_id, album._id, albums, $index)"></span>
+        <div class="date">Date of release: {{album.dor}}</div>
+        <div ng-repeat="song in album.songs" class="in-block">
+            <span class="name">{{song.name}}</span>
+            <span ng-show="exp3" class="glyphicon glyphicon-remove pull-right" ng-click="removeSong(album.artist_id, album._id, song._id, album.songs, $index)"></span>
+            <div class="link">{{song.soundCloud}}</div>
         </div>
     </div>
 </div>

@@ -1,0 +1,88 @@
+<div>
+    <h1>About</h1>
+    <p>
+        This experiment implements filters to the loaded data. The search is performed on the already loaded list of artists
+         from server. All the searching will execute on client browser using angular framework.
+    </p>
+    <h1>Client JS Code</h1>
+    <p>
+        below is the code used at client to get the data from node-mongo server.
+    </p>
+    <pre>
+        <code>
+$scope.artists = lfmAPIservice.getAllArtists(function (data) {
+    $scope.artists = data;
+});
+
+lfmAPI.getAllArtists = function(callback) {
+    $http.jsonp(URL+"artists?callback=JSON_CALLBACK")
+    .success(function(data){
+        ...
+        callback(data.data);
+    });
+};
+        </code>
+    </pre>
+    <h1>Filter JS Code</h1>
+    <p>
+        Below is the code to search for specific filter passed through the searchbar. It searches for the specific keyword
+         as a RegExp on available data in the cached list of artists. The filter is applied on Artist.name, Artist.Album.name &
+        Artist.Album.Song.name.
+    </p>
+    <pre>
+        <code>
+lfmAPI.searchArtistsUI = function (filter, callback) {
+    searchList = [];
+    if(filter.keyword) {
+        var reg = new RegExp(filter.keyword, 'ig');
+        for (var i in artists) {
+            var found = false;
+            if (reg.test(artists[i].name)) {
+                found = true;
+            }
+            for (var j in artists[i].albums) {
+                if (reg.test(artists[i].albums[j].name)) {
+                    found = true;
+                }
+                for (var k in artists[i].albums[j].songs) {
+                    if (reg.test(artists[i].albums[j].songs[k].name)) {
+                        found = true;
+                    }
+                }
+            }
+            if(found)
+                searchList.push(artists[i]);
+        }
+    }
+    if(searchList.length == 0)
+    searchList = artists;
+    callback(searchList);
+    return searchList;
+};
+        </code>
+    </pre>
+</div>
+
+<div>
+    <h1>Source</h1>
+    <ul>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week9_exps/exp1.html">here</a> to view HTML source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week9_exps/js/exp1.js">here</a> to view JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week9_exps/js/exp1-controller.js">here</a> to view controller JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week9_exps/js/exp1-services.js">here</a> to view services JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/nodejs/mongo-app.js">here</a> to view NodeJS app source.
+        </li>
+    </ul>
+    <h1>Reference</h1>
+    <a href="http://w3schools.com" target="_blank">www.w3schools.com</a></br>
+    <a href="http://www.toptal.com/angular-js/a-step-by-step-guide-to-your-first-angularjs-app" target="_blank">www.toptal.com</a>
+</div>

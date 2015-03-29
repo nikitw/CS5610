@@ -1,6 +1,22 @@
-<h1>Artists</h1>
+<div class="search-bar margin-top-10" ng-init="loadArtists()">
+    <form>
+        <div class="input-group">
+            <div ng-if="advSearch" class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{searchTo? searchTo: "Artist "}}<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a ng-click="setSearchTo('name', 'home')">Artist</a></li>
+                    <li><a ng-click="setSearchTo('albums.name', 'albums')">Album</a></li>
+                    <li><a ng-click="setSearchTo('albums.songs.name', 'songs')">Song</a></li>
+                </ul>
+            </div>
+            <input class="form-control input-group-addon align-left" ng-model="filter.keyword"/>
+            <span ng-if="uiSearch" ng-click="searchUI()" class="btn btn-info input-group-addon"><span class="glyphicon glyphicon-search"><button type="submit" class="hidden"></button></span></span>
+            <span ng-if="serverSearch" ng-click="search()" class="btn btn-info input-group-addon"><span class="glyphicon glyphicon-search"><button type="submit" class="hidden"></button></span></span>
+        </div>
+    </form>
+</div>
 <div id="row-container">
-    <div class="artist-block" ng-show="exp2">
+    <!--<div class="artist-block" ng-show="exp2">
         <h3 ng-if="editIndex == null">Add Artist Details</h3>
         <h3 ng-if="editIndex != null">Edit Artist Details</h3>
         <form id="add-edit-artist">
@@ -29,7 +45,7 @@
             <input type="submit" ng-click="addArtist()">
             <button ng-click="cancelEdit()" class="cancel" ng-if="editIndex != null">cancel</button>
         </form>
-    </div>
+    </div>-->
     <div ng-repeat="artist in artists" class="artist-block" ng-show="exp1">
         <span class="name">{{artist.name}}</span>
         <span ng-show="exp3" class="glyphicon glyphicon-remove pull-right" ng-click="removeArtist(artist._id, $index)"></span>

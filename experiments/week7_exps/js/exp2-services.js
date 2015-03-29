@@ -1,4 +1,4 @@
-var services = ﻿angular.module('PrimeBoxApp.services', []);
+var services = angular.module('PrimeBoxApp.services', []);
 
 var Error = function(errno, message) {
   this.errno = errno;

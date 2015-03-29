@@ -3,6 +3,8 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var md5 = require('MD5');
 var app = express();
+var mongoapp = require('./mongo-app.js');
+var jwtapp = require('./jwt-app.js');
 
 app.use(express.static(__dirname + "/public/"))
 app.use(bodyParser.json()); // for parsing application/json
@@ -13,10 +15,13 @@ app.use(function(req, res, next) {
 
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With');
+    res.header('Access-Control-Allow-Headers', 'Content-Type,X-Requested-With, Authorization');
 
     next();
 });
+
+app.use('/primebox', mongoapp);
+app.use('/auth', jwtapp);
 
 var URL;
 app.ip = process.env.OPENSHIFT_NODEJS_IP;
@@ -41,6 +46,7 @@ var artists = [
     {name: "Swidish House Mafia", genre:"House", dob:"1983-02-18", albums:['Save The World', 'Until Now', 'One']},
     {name: "Armin Van Buuren", genre:"Trance", dob:"1978-02-11", albums:['Intense', 'Imagine', 'Mirage']}
   ];
+
 
 app.get('/app/artists', function (req, res) {
     res.jsonp(artists);

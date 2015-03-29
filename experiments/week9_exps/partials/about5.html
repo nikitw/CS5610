@@ -1,0 +1,97 @@
+<div>
+    <h1>About</h1>
+    <p>
+        This experiment demonstrates authentication using JsonWebToken (jwt). This is currently the most widely used and sturdy
+         authentication mechanism. This authorization technique uses ng-storage module from angular and jsonwebtoken library from Node
+         at server side.
+    </p>
+    <h1>Client JS Code</h1>
+    <p>
+        Below is a client JS code that is put inside a service which is responsible for requesting the server for authentication and
+        also saves the generated token in browser memory using ng-storage module. It also provides the mechanism to decode the token back
+        to an authenticated user.
+    </p>
+    <pre>
+        <code>
+function getUserFromToken() {
+    var token = $localStorage.token;
+    var user = {};
+    if (typeof token !== 'undefined') {
+        var encoded = token.split('.')[1];
+        user = JSON.parse(urlBase64Decode(encoded));
+    }
+    return user;
+}
+
+var currentUser = getUserFromToken();
+
+return {
+    save: function(data, success, error) {
+        $http.post(baseUrl + 'signin', data).success(success).error(error)
+    },
+    signin: function(data, success, error) {
+        $http.post(baseUrl + 'authenticate', data).success(success).error(error)
+    },
+    me: function(success, error) {
+        $http.get(baseUrl + 'me').success(success).error(error)
+    },
+    logout: function(success) {
+        changeUser({});
+        delete $localStorage.token;
+        success();
+    },
+    getUser: function() {
+        return getUserFromToken();
+    }
+};
+        </code>
+    </pre>
+    <h1>Server JS Code</h1>
+    <p>
+        The code below demonstrates a way to generate the token on server using the saved user object. This fingerprint is then
+         given back to the client in order to ensure the authenticated access until next logout execution. It also explains how
+         it ensures that the access is requested by an authentic user.
+    </p>
+    <pre>
+        <code>
+user.token = jwt.sign(user, process.env.JWT_SECRET || md5('SECRET OF API'));
+
+function ensureAuthorized(req, res, next) {
+    var bearerToken;
+    var bearerHeader = req.headers["authorization"];
+    if (typeof bearerHeader !== 'undefined') {
+        var bearer = bearerHeader.split(" ");
+        bearerToken = bearer[1];
+        req.token = bearerToken;
+        next();
+    } else {
+        res.send(403);
+    }
+}
+        </code>
+    </pre>
+</div>
+
+<div>
+    <h1>Source</h1>
+    <ul>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week9_exps/exp5.html">here</a> to view HTML source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week9_exps/js/exp5.js">here</a> to view JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week9_exps/js/exp5-controller.js">here</a> to view controller JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week9_exps/js/exp5-services.js">here</a> to view services JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/nodejs/jwt-app.js">here</a> to view NodeJS app source.
+        </li>
+    </ul>
+    <h1>Reference</h1>
+    <a href="http://w3schools.com" target="_blank">www.w3schools.com</a></br>
+    <a href="http://www.toptal.com/angular-js/a-step-by-step-guide-to-your-first-angularjs-app" target="_blank">www.toptal.com</a>
+</div>

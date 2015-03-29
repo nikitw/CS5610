@@ -5,12 +5,16 @@ app.controller('homeCtrl', function($scope, $location, lfmAPIservice) {
     $scope.exp1 = true;
     $scope.exp2 = true;
     $scope.exp3 = true;
-    $scope.exp4 = true;
+
     $scope.exp5 = true;
-
+    $scope.serverSearch = true;
+    $scope.advSearch = true;
     $scope.artist = new Artist();
+    $scope.searchTo = 'Artist ';
+    $scope.searchKey = 'name';
+    $scope.filter = lfmAPIservice.getFilter();
 
-    $scope.artists = lfmAPIservice.getAllArtists(function (data) {
+    $scope.artists = lfmAPIservice.getAllArtists($scope.filter,function (data) {
         $scope.artists = data;
     });
 
@@ -49,12 +53,29 @@ app.controller('homeCtrl', function($scope, $location, lfmAPIservice) {
         }));
     };
 
+
     $scope.removeSong = function (id, aid, sid, songs, index) {
         lfmAPIservice.removeSong(new Request({artist: id, album: aid, song: sid}, function(data) {
             songs.splice(index, 1);
         }, function(err) {
             console.log(err);
         }));
+    };
+
+    $scope.searchUI = function() {
+        lfmAPIservice.searchArtistsUI($scope.filter, function(data) {
+            $scope.artists = data;
+        });
+    };
+
+    $scope.search = function() {
+        var filter = {};
+        filter[$scope.searchKey] = $scope.filter.keyword;
+        var flt = lfmAPIservice.getFilter();
+        flt.keyword = JSON.stringify(filter);
+        lfmAPIservice.getAllArtists(flt,function (data) {
+            $scope.artists = data;
+        });
     };
 
     $scope.editIndex = null;
@@ -91,4 +112,14 @@ app.controller('homeCtrl', function($scope, $location, lfmAPIservice) {
     $scope.remSong = function (songs, id) {
         songs.splice(id, 1);
     };
+
+    $scope.setSearchTo = function(to) {
+        if (new RegExp('Song', 'ig').test(to))
+            $scope.searchTo = 'Song ';
+        else if (new RegExp('Album', 'ig').test(to))
+            $scope.searchTo = 'Album ';
+        else
+            $scope.searchTo = 'Artist ';
+        $scope.searchKey = to;
+    }
 });

@@ -23,7 +23,52 @@ app.get('/', function (req, res) {
 });
 
 app.get('/artists', function(req, res) {
-    Artist.find({}, function(err, doc) {
+    var keyword;
+    try {
+        keyword = JSON.parse(req.query.keyword);
+    } catch (err) {
+        keyword = null;
+    }
+
+    if(!keyword || keyword == 'null' || keyword == 'undefined' || keyword == 'NaN') keyword = {name:'.*'};
+
+    getArtists(getFilter({keyword:keyword, start:new Date('undefined'), end:new Date('undefined')}), 1, function(doc, err) {
+        if(err || !doc)
+            res.jsonp({err: new Error('no artist found!')});
+        else
+            res.jsonp({data: doc});
+    });
+});
+
+app.get('/albums', function(req, res) {
+    var keyword;
+    try {
+        keyword = JSON.parse(req.query.keyword);
+    } catch (err) {
+        keyword = null;
+    }
+
+    if(!keyword || keyword == 'null' || keyword == 'undefined' || keyword == 'NaN') keyword = {'albums.name':'.*'};
+
+    getAlbums(null,getFilter({keyword:keyword, start:new Date('undefined'), end:new Date('undefined')}), 1, function(doc, err) {
+        if(err || !doc)
+            res.jsonp({err: new Error('no artist found!')});
+        else
+            res.jsonp({data: doc});
+    });
+});
+
+app.get('/songs', function(req, res) {
+    var keyword;
+    try {
+        keyword = JSON.parse(req.query.keyword);
+    } catch (err) {
+        keyword = null;
+    }
+
+    if(!keyword || keyword == 'null' || keyword == 'undefined' || keyword == 'NaN') keyword = {'albums.name':'.*'};
+
+    getSongs(null,getFilter({keyword:keyword, start:new Date('undefined'), end:new Date('undefined')}), 1, function(doc, err) {
         if(err || !doc)
             res.jsonp({err: new Error('no artist found!')});
         else
@@ -69,9 +114,10 @@ app.put('/artists/:id', function(req, res) {
         res.jsonp({err: new Error('no artist object found')});
         return;
     }
+    delete req.body._id;
     Artist.findOneAndUpdate({_id: req.params.id}, req.body,function(err, doc) {
         if(err || !doc)
-            res.jsonp({err: new Error('no artist found!')});
+            res.jsonp({err: {message: err.message}});
         else
             res.jsonp({data: doc});
     });
@@ -148,19 +194,10 @@ app.delete('/artists/:id/albums/:aid', function(req, res) {
     });
 });
 
-function getAlbums(id, filter, order, callback) {
-    if(!id) callback(null, new Error('undefined Artist'));
+function getArtists(filter, order, callback) {
     Artist.aggregate([
-        {$match: { _id: new ObjectId(id)}},
-        {$unwind: "$albums"},
         {$match: filter},
-        {$project: {
-            name: '$albums.name',
-            dor: '$albums.dor',
-            songs: '$albums.songs',
-            _id: '$albums._id'
-        }},
-        {$sort: {dor: order}}
+        {$sort: {dob: order}}
     ], function(err, res) {
         if(err || !res)
             callback(null, err);
@@ -169,27 +206,107 @@ function getAlbums(id, filter, order, callback) {
     });
 }
 
+function getAlbums(id, filter, order, callback) {
+    if(!id) {
+        Artist.aggregate([
+            {$unwind: "$albums"},
+            {$match: filter},
+            {
+                $project: {
+                    name: '$albums.name',
+                    dor: '$albums.dor',
+                    songs: '$albums.songs',
+                    _id: '$albums._id',
+                    artist_name: '$name',
+                    artist_id: '$_id'
+                }
+            },
+            {$sort: {dor: order}}
+        ], function (err, res) {
+            if (err || !res) {
+                console.log(err);
+                callback(null, err);
+            }
+            else
+                callback(res);
+        });
+    } else {
+        Artist.aggregate([
+            {$match: {_id: new ObjectId(id)}},
+            {$unwind: "$albums"},
+            {$match: filter},
+            {
+                $project: {
+                    name: '$albums.name',
+                    dor: '$albums.dor',
+                    songs: '$albums.songs',
+                    _id: '$albums._id',
+                    artist_name: '$name',
+                    artist_id: '$_id'
+                }
+            },
+            {$sort: {dor: order}}
+        ], function (err, res) {
+            if (err || !res)
+                callback(null, err);
+            else
+                callback(res);
+        });
+    }
+}
+
 function getSongs(id, filter, order, callback) {
-    if(!id) callback(null, new Error('undefined Artist'));
-    Artist.aggregate([
-        {$match: { _id: new ObjectId(id)}},
-        {$unwind: "$albums"},
-        {$unwind: "$albums.songs"},
-        {$match: filter},
-        {$project: {
-            name: '$albums.songs.name',
-            album: '$albums.name',
-            dor: '$albums.dor',
-            soundCloud: '$albums.songs.soundCloud',
-            _id: '$albums.songs._id',
-        }},
-        {$sort: {name: order}}
-    ], function(err, res) {
-        if(err || !res)
-            callback(null, err);
-        else
-            callback(res);
-    });
+    if(!id) {
+        Artist.aggregate([
+            {$unwind: "$albums"},
+            {$unwind: "$albums.songs"},
+            {$match: filter},
+            {
+                $project: {
+                    name: '$albums.songs.name',
+                    album: '$albums.name',
+                    album_id: '$albums._id',
+                    dor: '$albums.dor',
+                    soundCloud: '$albums.songs.soundCloud',
+                    _id: '$albums.songs._id',
+                    artist_name: '$name',
+                    artist_id: '$_id'
+                }
+            },
+            {$sort: {name: order}}
+        ], function (err, res) {
+            if (err || !res)
+                callback(null, err);
+            else
+                callback(res);
+        });
+    }
+    else {
+        Artist.aggregate([
+            {$match: {_id: new ObjectId(id)}},
+            {$unwind: "$albums"},
+            {$unwind: "$albums.songs"},
+            {$match: filter},
+            {
+                $project: {
+                    name: '$albums.songs.name',
+                    album: '$albums.name',
+                    album_id: '$albums._id',
+                    dor: '$albums.dor',
+                    soundCloud: '$albums.songs.soundCloud',
+                    _id: '$albums.songs._id',
+                    artist_name: '$name',
+                    artist_id: '$_id'
+                }
+            },
+            {$sort: {name: order}}
+        ], function (err, res) {
+            if (err || !res)
+                callback(null, err);
+            else
+                callback(res);
+        });
+    }
 }
 
 function getFilter(filter) {
@@ -199,6 +316,8 @@ function getFilter(filter) {
         flt.$or = [];
         for(var f in filter.keyword) {
             var kw = {};
+            if(!filter.keyword[f] || filter.keyword[f] == 'null' || filter.keyword[f] == 'undefined' || filter.keyword[f] == 'NaN')
+                filter.keyword[f] = '.*';
             kw[f] = {$regex: eval('/' + filter.keyword[f] + '/i')};
             flt.$or.push(kw);
         }

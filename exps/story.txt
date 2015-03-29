@@ -7,3 +7,4 @@ whatisnext.htm?whatisnext.txt   What is Next?
 ../experiments/week6/	NodeJS Basics
 ../experiments/week7/	NodeJS User Login & Session
 ../experiments/week8/	NodeJS MongoDB [INSERT SELECT UPDATE DELETE]
+../experiments/week9/	Mongo/Angular search and JWT Authentication

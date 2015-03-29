@@ -1,0 +1,38 @@
+.artist-block {
+    background-color: #f6f6f6;
+    padding: 10px;
+    border:1px solid #aaaaaa;
+    margin-top: 10px;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.date {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.link {
+    color: #007fff;
+}
+
+.in-block {
+    padding: 10px;
+    border: 1px solid #007fff;
+    background-color: #a6e1ec;
+    margin-top: 5px;
+}
+
+.in-block .in-block {
+    background-color: #f7f4c2;
+}
+
+.in-block .in-block .in-block {
+    background-color: #b2dba1;
+}
+
+.spacing {
+    margin-right: 5px;
+}
