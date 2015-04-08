@@ -488,18 +488,47 @@
     <div class="expbar zindex3">
         <ul class="master_navigation">
             <li><a href="exps/index.htm" target="_blank">Experiments</a></li>
-            <li><a href="#">Projects</a></li>
+            <li><a href="http://tripplanner-cs6240nwaghela.rhcloud.com" target="_blank">Project</a></li>
             <li><a href="https://github.com/waghelanikit/CS5610" target="_blank">GitHub</a></li>
         </ul>
     </div>
 <div class="translucent">
     <H1>
-        More features coming soon!
+        Responsive
     </H1>
     <hr />
     <p>
         And yes, this site is responsive. Please resize your browser window to see it's effects. Navigation becomes exciting as the size changes.
     </p>
+    <H1>
+        AngularJS
+    </H1>
+    <hr />
+    <p>
+        New AngularJS webapps are interesting and quick.
+    </p>
+    <H1>
+        NodeJS
+    </H1>
+    <hr />
+    <p>
+        Server side application bolstered by Node, one of the most powerful tool for developing quick and sophisticated webapps.
+    </p>
+    <H1>
+        NoSQL (MongoDb using Mongoose JS)
+    </H1>
+    <hr />
+    <p>
+        SQL is powerful, but NoSQL is a powerhouse in itself. The flexibility offered by NoSQL is commendable. Complex logic becomes less tricky with Mongoose.
+    </p>
+    <H1>
+        Project: TripPlanner
+    </H1>
+    <hr />
+    <p>
+        An application that helps manage trips for users with a simplistic UI and handy features. Users will be able to share trips with others on request or voluntarily. Have a look at the beta version by cliking on project TAB.
+    </p>
+
 </div>
 </div>
 

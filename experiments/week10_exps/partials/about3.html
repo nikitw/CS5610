@@ -1,0 +1,53 @@
+<div>
+    <h1>About</h1>
+    <p>
+        Google's Map API allows to diplay the map and location on the browser with less effort. This experiments demonstrates the
+        placing multiple markers in order searched by user and also draws a polygon between them in the search order. This has an
+        application in displaying planned trips as a map view.
+    </p>
+    <h1>Client JS Code</h1>
+    <p>
+        The API call places all the markers in memory on the map and also draws a polygon around them.
+    </p>
+    <pre>
+        <code>
+            mapsAPI.plotMarkers = function (map) {
+            for(var m in markers) {
+            markers[m].setMap(map);
+            var n = parseInt(m)+1;
+            if(n == markers.length)
+            n = 0;
+
+            new google.maps.Polyline({
+            path: [markers[m].position, markers[n].position],
+            strokeColor:"#99f",
+            strokeOpacity:0.8,
+            strokeWeight:2,
+            map: map
+            });
+            }
+            };
+        </code>
+    </pre>
+</div>
+
+<div>
+    <h1>Source</h1>
+    <ul>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week10_exps/exp3.html">here</a> to view HTML source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week10_exps/js/exp3.js">here</a> to view App JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week10_exps/js/exp3-controller.js">here</a> to view controller JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week10_exps/js/exp3-services.js">here</a> to view services JS source.
+        </li>
+    </ul>
+    <h1>Reference</h1>
+    <a href="http://w3schools.com" target="_blank">www.w3schools.com</a></br>
+    <a href="http://www.toptal.com/angular-js/a-step-by-step-guide-to-your-first-angularjs-app" target="_blank">www.toptal.com</a>
+</div>

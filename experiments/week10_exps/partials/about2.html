@@ -1,0 +1,47 @@
+<div>
+    <h1>About</h1>
+    <p>
+        Google's Map API allows to diplay the map and location on the browser with less effort. This experiments demonstrates the
+        HTML5 geolocation feature (supported browsers only). It asks for user to allow location access for this page and grabs the
+        location from browser to display the map with the marker with maximum possible accuracy.
+    </p>
+    <h1>Client JS Code</h1>
+    <p>
+        The API call places map object that initializes the canvas over a div with a specified ID on window.load.
+    </p>
+    <pre>
+        <code>
+            function getLocation(callback) {
+            if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(callback);
+            } else {
+            callback({ err: "Geolocation is not supported by this browser."});
+            }
+            }
+        </code>
+    </pre>
+</div>
+
+<div>
+    <h1>Source</h1>
+    <ul>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week10_exps/exp2.html">here</a> to view HTML source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week10_exps/js/exp2.js">here</a> to view App JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week10_exps/js/exp1-jq.js">here</a> to view JQuery source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week10_exps/js/exp2-controller.js">here</a> to view controller JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week10_exps/js/exp2-services.js">here</a> to view services JS source.
+        </li>
+    </ul>
+    <h1>Reference</h1>
+    <a href="http://w3schools.com" target="_blank">www.w3schools.com</a></br>
+    <a href="http://www.toptal.com/angular-js/a-step-by-step-guide-to-your-first-angularjs-app" target="_blank">www.toptal.com</a>
+</div>

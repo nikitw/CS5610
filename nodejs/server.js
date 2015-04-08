@@ -1,15 +1,35 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var fs = require('fs');
 var md5 = require('MD5');
 var app = express();
 var mongoapp = require('./mongo-app.js');
 var jwtapp = require('./jwt-app.js');
-
+var done=false;
+var filename = '';
+var fileExts = ['jpg', 'jpeg', 'png', 'tiff', 'gif', 'swf'];
 app.use(express.static(__dirname + "/public/"))
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-app.use(multer());
+app.use(multer({ dest: './uploads/',
+    rename: function (fieldname, filename) {
+        return filename+Date.now();
+    },
+    onFileUploadStart: function (file, req, res) {
+        var parts = file.path.split('.');
+        if(fileExts.indexOf(parts[parts.length - 1]) < 0) {
+            res.jsonp({err: 'invalid file format'});
+            throw new Error('invalid file format');
+        }
+    },
+    onFileUploadComplete: function (file) {
+        filename = file.path;
+        done=true;
+    }
+}));
+
+
 
 app.use(function(req, res, next) {
 
@@ -36,6 +56,49 @@ if(app.ip === undefined) {
 
 app.get('/', function (req, res) {
   res.render("index.html");
+});
+
+app.post('/app/photos', function(req, res) {
+    if(done)
+        res.jsonp({data:filename});
+    else
+        res.jsonp({err:'upload failed'});
+});
+
+app.get('/app/photos', function(req, res) {
+    fs.readdir('./uploads', function(err, files) {
+        if(err) res.jsonp({err: err.message});
+        else {
+            for(var f in files) {
+                if(/^\..*$/.test(files[f]))
+                    files.splice(f, 1);
+            }
+            res.jsonp(files);
+        }
+    });
+});
+
+app.get('/app/photos/:name', function(req, res) {
+    var fname = req.params.name;
+    fs.readFile('./uploads/'+fname, function (err, file){
+        if(err)
+            throw new Error('no file found');
+        else {
+            var parts = fname.split('.');
+            res.writeHead(200, {'Content-Type': 'images/' + fileExts[fileExts.indexOf(parts[parts.length - 1])]});
+            res.end(file);
+        }
+    });
+});
+
+app.delete('/app/photos/:name', function(req, res) {
+    var fname = req.params.name;
+    fs.unlink('./uploads/'+fname, function(err) {
+        if(err)
+            res.jsonp({err: err.message});
+        else
+            res.jsonp({data: 'successfully deleted '+fname});
+    });
 });
 
 var artists = [
@@ -74,6 +137,8 @@ app.put('/app/artists/:id', function (req, res) {
     artists[index] = req.body;
     res.jsonp(artists);
 });
+
+
 
 var users = [
   {name: "admin", username:"admin@neu.edu", password:"admin", hint:"admin", admin:true},

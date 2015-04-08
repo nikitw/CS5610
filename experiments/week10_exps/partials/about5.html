@@ -1,0 +1,74 @@
+<div>
+    <h1>About</h1>
+    <p>
+        This application uses Multer library in Node Express to aid file uploads specifically all the image formats. It uses ngUpload
+        library that helps file uploads via Angular. <b>It allows deltion of files from server too.</b>
+    </p>
+
+    <h1>Client Form to upload a file</h1>
+    <pre>
+        <code>
+            &lt;form action="http://localhost:8888/app/photos" ng-upload="onComplete(content)"&gt;
+                &lt;div class="input-group"&gt;
+                    &lt;span class="input-group-addon"&gt;&lt;span class="glyphicon glyphicon-folder-open"&gt;&lt;/span&gt;&lt;/span&gt;
+                    &lt;input class="form-control" type="file" name="file"&gt;
+                    &lt;span class="input-group-btn"&gt;&lt;button type="submit" class="btn btn-default"&gt;Submit&lt;/button&gt;&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        </code>
+    </pre>
+    <h1>Client JS Code</h1>
+    <p>
+        Deleting a file from the server is a http delete request as described below. It uses the file name to search and unlink on server.
+    </p>
+    <pre>
+        <code>
+            photosAPI.deletePhoto = function (name, callback) {
+            $http.delete(URL+'/'+name).success(function(data) {
+            if(data.err)
+            console.log(data.err);
+            else
+            callback(data);
+            });
+            };
+        </code>
+    </pre>
+    <h1>Server JS Code</h1>
+    <p>
+        Server JS listens to a request with param name as the name of the file to be deleted.
+    </p>
+    <pre>
+        <code>
+            app.delete('/app/photos/:name', function(req, res) {
+            var fname = req.params.name;
+            fs.unlink('./uploads/'+fname, function(err) {
+            if(err)
+            res.jsonp({err: err.message});
+            else
+            res.jsonp({data: 'successfully deleted '+fname});
+            });
+            });
+        </code>
+    </pre>
+</div>
+
+<div>
+    <h1>Source</h1>
+    <ul>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week10_exps/exp5.html">here</a> to view HTML source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week10_exps/js/exp5.js">here</a> to view App JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week10_exps/js/exp5-controller.js">here</a> to view controller JS source.
+        </li>
+        <li>
+            Click <a href="../../fileview/Default.aspx?~/experiments/week10_exps/js/exp5-services.js">here</a> to view services JS source.
+        </li>
+    </ul>
+    <h1>Reference</h1>
+    <a href="http://w3schools.com" target="_blank">www.w3schools.com</a></br>
+    <a href="http://www.toptal.com/angular-js/a-step-by-step-guide-to-your-first-angularjs-app" target="_blank">www.toptal.com</a>
+</div>

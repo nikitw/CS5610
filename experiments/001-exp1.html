@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>HTML/HTML5 experiment</title>
+    <link href="css/experiments-basic.css" rel="stylesheet"/>
+</head>
+<body>
+        <div class="container">
+            <h1>HTML5 features</h1>
+            <p>HTML5 has various inbuilt features that ease up the website building hence further.</p>
+            <div class="section">
+                <h1> &lt;a&gt; anchor tag</h1>
+                <p>Links and references to other pages on the same site or to an altogether different domain can be done via Anchor <b>a</b> tags. There are also various target locations configurable for each anchor.</p>
+                <a href="http://google.com" target="_blank"> Google</a>
+            </div>
+            <div class="section">
+                <h1> &lt;img&gt; image tag</h1>
+                <p>Images can be put on a web page using <b>img</b> tag just by specifying it's source URL</p>
+                <img src="https://lh4.ggpht.com/xQY2oLu1jEfBqJG52rzhtD4e7yXqvypm_q5V59mjw0twGaJUTNWZUUWewCj5Z4Reh60=w300" alt="alt" width=128 height=128 />
+            </div>
+            <div class="section">
+                <h1>Image maps</h1>
+                <p>Image Maps is a unique feature of HTML5 which allows us to target multiple selective areas on a single image, each when clicked, behaves differently as per it's specified redirection. </p>
+                <img src="http://pages.csam.montclair.edu/~chopping/EAES_Planet.gif" alt="Planets" usemap="#planetmap" style="width:145px;height:145px">
+
+                <map name="planetmap">
+                    <area shape="rect" coords="0,0,82,126" alt="Sun" href="http://31.media.tumblr.com/tumblr_m3o80hcFz91rohdw9o1_500.gif">
+                    <area shape="circle" coords="90,58,3" alt="Mercury" href="http://www.clickurl.in/img/blue-circle.gif">
+                    <area shape="circle" coords="124,58,8" alt="Venus" href="http://kunisan.jp/planets/venus.gif">
+                </map>
+            </div>
+            <div class="section">
+                <h1>Figure</h1>
+                <p>Figure tag is can nest the image with it's specific figure caption. Caption is placed right below the image once loaded.</p>
+                <figure>
+                    <img src="https://lh4.ggpht.com/xQY2oLu1jEfBqJG52rzhtD4e7yXqvypm_q5V59mjw0twGaJUTNWZUUWewCj5Z4Reh60=w300" alt="About image" />
+                    <figcaption>
+                        <p>figure caption</p>
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="section">
+                <h1>Editable To-Do list. Click one of the item.</h1>
+                <p>This feature helps generation/modification of a TO-DO list on a webpage. It is a pure HTML5 feature, no CSS implied.</p>
+                <ul contenteditable="true">
+                    <li> inp 1. </li>
+                    <li> inp 2. </li>
+                    <li> inp 3. </li>
+                </ul>
+            </div>
+            <div class="section">
+            <h1>Input type email </h1>
+                <p>This imput type enables valid email address verification by the page itself without using any javascripts or server side validations.</p>
+                    <form>
+                        <label for="email">Email:</label>
+                        <input id="email" name="email" type="email" />
+                        <button type="submit">submit</button>
+                    </form>
+            </div>
+            <div class="section">
+                <h1>Placeholders</h1>
+                <p>Placeholders occupy the space on an input box unless focused by a User.</p>
+                <input type="email" placeholder="abc@def.com" />
+            </div>
+            <div class="section">
+                <h1>Header and Footer Tags</h1>
+                <p>HTML5 reduces usage of divs and provides different tags for specifying Header Footers and Navigation.</p>
+                <header><h2>Header section</h2></header>
+                <footer><p>Footer section</p></footer>
+            </div>
+            <div class="section">
+                <h1>Audio support</h1>
+                <p>HTML5 has an inbuilt audio support that can play audio files of MP3, OGG etc. formats.</p>
+                <audio autoplay="autoplay" controls="controls">
+                    <source src="http://www.mediacollege.com/audio/tone/files/250Hz_44100Hz_16bit_05sec.wav" />
+                    <a>Download</a>
+                </audio>
+            </div>
+            <div class="section">
+                <h1>Video support</h1>
+                <p>Video playback support is now a part of HTML5 thus replacing most of Flash content on web. It is a fast secure and reliable playback feature by HTML5. All the media playback codecs are supported by most of the HTML5 supported browsers.</p>
+                <video controls preload>
+                    <source src="http://techslides.com/demos/sample-videos/small.mp4" type="video/mp4" />
+                    <p> Your browser is old. <a href="http://techslides.com/demos/sample-videos/small.mp4">Download this video instead.</a> </p>
+                </video>
+            </div>
+            <div class="section">
+                <h1>Range</h1>
+                <p>HTML5 provides a gauge feature that can span up to certain specified range and can be used as a soft tool with the help of a tiny CSS and Java Script.</p>
+                <input type="range" name="range" min="0" max="10" step="1" value="">
+                <output name="result">  </output>
+            </div>
+
+            <div class="section">
+                <h1>Source</h1>
+                <ul>
+                    <li>
+                        Click <a href="../fileview/Default.aspx?~/experiments/001-exp1.html">here</a> to view HTML source.
+                    </li>
+                    <li>
+                        Click <a href="../fileview/Default.aspx?~/experiments/css/experiments-basic.css">here</a> to view CSS source.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h1>Reference</h1>
+                <a href="http://w3schools.com" target="_blank">www.w3schools.com</a>
+            </div>
+        </div>
+    </body>
+</html>

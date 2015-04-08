@@ -1,0 +1,9 @@
+<form>
+    <div class="input-group">
+        <span class="input-group-addon address-bar">Search</span>
+        <input class="form-control" ng-model="address" type="text" id="address" placeholder="Address"/>
+        <span class="input-group-addon address-bar btn"><span class="glyphicon glyphicon-search" ng-click="addMarkerOnMap()"></span></span>
+    </div>
+    <input type="submit" class="hidden" ng-click="addMarkerOnMap()">
+</form>
+<div id="map-canvas" map-space></div>

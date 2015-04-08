@@ -1,0 +1,5 @@
+../week10_exps/exp1.html		Google Maps integration
+../week10_exps/exp2.html		Geolocation with accurate marker
+../week10_exps/exp3.html		Google Maps with multiple markers and Polygon test
+../week10_exps/exp4.html		Photo upload using Node Express Multer and Angular
+../week10_exps/exp5.html		Photo delete using Node Express and Angular
