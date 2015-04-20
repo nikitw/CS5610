@@ -488,7 +488,7 @@
     <div class="expbar zindex3">
         <ul class="master_navigation">
             <li><a href="exps/index.htm" target="_blank">Experiments</a></li>
-            <li><a href="http://tripplanner-cs6240nwaghela.rhcloud.com" target="_blank">Project</a></li>
+            <li><a href="/tripPlanner" target="_blank">Project</a></li>
             <li><a href="https://github.com/waghelanikit/TripPlanner" target="_blank">Project GIT</a></li>
             <li><a href="https://github.com/waghelanikit/CS5610" target="_blank">GitHub</a></li>
         </ul>
